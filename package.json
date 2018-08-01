@@ -119,8 +119,10 @@
     "velocity-react": "^1.3.3"
   },
   "devDependencies": {
+    "babel-core": "^6.26.3",
     "babel-eslint": "^8.0.0",
     "babel-jest": "^21.2.0",
+    "babel-plugin-dynamic-import-node": "^2.0.0",
     "babel-plugin-lodash": "^3.2.11",
     "babel-plugin-module-resolver": "^2.7.1",
     "babel-plugin-react-require": "^3.0.0",
