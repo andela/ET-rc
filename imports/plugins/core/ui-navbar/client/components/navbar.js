@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Components } from "@reactioncommerce/reaction-components";
 import { Meteor } from "meteor/meteor";
+import startCustomerTour from "/imports/plugins/included/customerTour/intro";
 
 // TODO: Delete this, and do it the react way - Mike M.
 async function openSearchModalLegacy(props) {
@@ -44,6 +45,11 @@ class NavBar extends Component {
     openSearchModalLegacy(this.props);
   }
 
+  startTour = (e) => {
+    e.preventDefault();
+    startCustomerTour();
+  }
+
   renderLanguage() {
     return (
       <div className="languages hidden-xs">
@@ -75,7 +81,7 @@ class NavBar extends Component {
   renderSearchButton() {
     if (this.props.searchEnabled) {
       return (
-        <div className="search">
+        <div className="search" id="search">
           <Components.FlatButton
             icon="fa fa-search"
             kind="flat"
@@ -84,6 +90,19 @@ class NavBar extends Component {
         </div>
       );
     }
+  }
+
+  renderCustomerTour() {
+    return (
+      <div className="tour">
+        <Components.FlatButton
+          icon="fa fa-paper-plane"
+          kind="flat"
+          tooltip="Take a tour"
+          onClick={this.startTour}
+        />
+      </div>
+    );
   }
 
   renderNotificationIcon() {
@@ -97,10 +116,10 @@ class NavBar extends Component {
   renderCartContainerAndPanel() {
     return (
       <div className="cart-container">
-        <div className="cart">
+        <div className="cart" id="cart-icon">
           <Components.CartIcon />
         </div>
-        <div className="cart-alert">
+        <div className="cart-alert" id="cart-alert">
           <Components.CartPanel />
         </div>
       </div>
@@ -138,6 +157,7 @@ class NavBar extends Component {
         {this.renderHamburgerButton()}
         {this.renderBrand()}
         {this.renderTagNav()}
+        {this.renderCustomerTour()}
         {this.renderSearchButton()}
         {this.renderNotificationIcon()}
         {this.renderLanguage()}
