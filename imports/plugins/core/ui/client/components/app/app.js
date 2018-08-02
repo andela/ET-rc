@@ -7,7 +7,6 @@ import Toolbar from "/imports/plugins/core/dashboard/client/components/toolbar";
 import { ActionViewContainer, PackageListContainer } from "/imports/plugins/core/dashboard/client/containers";
 import { ActionView, ShortcutBar } from "/imports/plugins/core/dashboard/client/components";
 import { Reaction } from "/client/api";
-
 const ConnectedToolbarComponent = ToolbarContainer(Toolbar);
 const ConnectedAdminViewComponent = ActionViewContainer(ActionView);
 const ConnectedShortcutBarContainer = PackageListContainer(ShortcutBar);

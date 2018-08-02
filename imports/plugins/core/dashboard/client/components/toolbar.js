@@ -13,6 +13,7 @@ import {
 } from "/imports/plugins/core/ui/client/components";
 import { Translatable } from "/imports/plugins/core/ui/client/providers";
 import { Reaction } from "/client/api";
+import { startIntro, firstSteps } from "/imports/plugins/included/tour/tourSetup";
 
 class PublishControls extends Component {
   static propTypes = {
@@ -137,6 +138,20 @@ class PublishControls extends Component {
     );
   }
 
+  renderTourButton() {
+    if (this.props.hasCreateProductAccess) {
+      return (
+        <FlatButton
+          icon="fa fa-paper-plane"
+          tooltip="Take a tour"
+          onClick={() => startIntro(firstSteps, true)}
+        />
+      );
+    }
+
+    return null;
+  }
+
   renderAddButton() {
     if (this.props.hasCreateProductAccess) {
       return (
@@ -188,6 +203,7 @@ class PublishControls extends Component {
           {this.renderShopSelect()}
         </ToolbarGroup>
         <ToolbarGroup lastChild={true}>
+          {this.renderTourButton()}
           {this.renderAddButton()}
           {this.renderPackageButons()}
           {this.renderCustomControls()}

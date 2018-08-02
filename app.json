@@ -19,10 +19,10 @@
     "BUILDPACK_PRELAUNCH_REACTION": {
       "required": true
     },
-    "REACTION_TIMEOUT": {
+    "MONGODB_URI": {
       "required": true
     },
-    "MONGODB_URI": {
+    "REACTION_TIMEOUT": {
       "required": true
     },
     "PAPERTRAIL_API_TOKEN": {

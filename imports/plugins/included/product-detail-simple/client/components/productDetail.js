@@ -2,8 +2,17 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Components } from "@reactioncommerce/reaction-components";
 import { ReactionLayout } from "/imports/plugins/core/layout/lib";
+import { startIntro, productSteps } from "/imports/plugins/included/tour/tourSetup";
 
 class ProductDetail extends Component {
+  componentDidMount() {
+    if (RegExp("multipage", "gi").test(window.location.search)) {
+      setTimeout(() => {
+        startIntro(productSteps, false);
+      }, 1000);
+    }
+  }
+
   get tags() {
     return this.props.tags || [];
   }
