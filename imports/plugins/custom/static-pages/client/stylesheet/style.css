@@ -1,0 +1,51 @@
+.static-page-container {
+  padding: 20px 40px;
+}
+.public-DraftEditor-content{
+  border: 1px solid #cccccc;
+  height: 400px;
+  padding: 20px;
+}
+.rdw-editor-toolbar {
+  border: 1px solid #cccccc !important;
+}
+.admin-controls-content {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.container {
+  width: auto;
+}
+.panel-body {
+  padding: 20px 40px;
+}
+hr {
+  width: 90%;
+  margin-bottom: 0;
+}
+td, th {
+  padding: 5px;
+}
+tr {
+  height: 50px;
+}
+thead {
+  height: 40px;
+}
+tbody{
+  max-height:200px;
+  overflow: auto;
+}
+.editStaticPage {
+  background-color: mediumslateblue;
+  color: white;
+  margin-right: 6px;
+}
+.editStaticPage:hover, .deleteStaticPage:hover {
+  background-color: transparent;
+}
+.deleteStaticPage {
+  background-color: orangered;
+  color: white;
+}

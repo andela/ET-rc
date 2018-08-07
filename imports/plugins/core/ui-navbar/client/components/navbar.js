@@ -150,6 +150,12 @@ class NavBar extends Component {
       </div>
     );
   }
+  
+  renderStaticPages() {
+    return (
+      <Components.StaticPages />
+    );
+  }
 
   render() {
     return (
@@ -158,6 +164,7 @@ class NavBar extends Component {
         {this.renderBrand()}
         {this.renderTagNav()}
         {this.renderCustomerTour()}
+        {this.renderStaticPages()}
         {this.renderSearchButton()}
         {this.renderNotificationIcon()}
         {this.renderLanguage()}
