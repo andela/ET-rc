@@ -6,7 +6,6 @@ import ToolbarContainer from "/imports/plugins/core/dashboard/client/containers/
 import Toolbar from "/imports/plugins/core/dashboard/client/components/toolbar";
 import { ActionViewContainer, PackageListContainer } from "/imports/plugins/core/dashboard/client/containers";
 import { ActionView, ShortcutBar } from "/imports/plugins/core/dashboard/client/components";
-import IntroJs from "/imports/plugins/included/customerTour/intro";
 import { Reaction } from "/client/api";
 
 const ConnectedToolbarComponent = ToolbarContainer(Toolbar);
@@ -42,12 +41,6 @@ class App extends Component {
     currentRoute: PropTypes.object.isRequired,
     hasDashboardAccess: PropTypes.bool,
     isActionViewOpen: PropTypes.bool
-  }
-
-  componentDidMount() {
-    if (RegExp("multipage", "gi").test(window.location.search)) {
-      IntroJs().start();
-    }
   }
 
   get isAdminApp() {
