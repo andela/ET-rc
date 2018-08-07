@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Components } from "@reactioncommerce/reaction-components";
 import { Meteor } from "meteor/meteor";
-import startCustomerTour from "/imports/plugins/included/customerTour/intro";
+import startCustomerTour from "../../../../included/customerTour/intro";
 
 // TODO: Delete this, and do it the react way - Mike M.
 async function openSearchModalLegacy(props) {
