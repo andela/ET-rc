@@ -1,9 +1,25 @@
 {
   "name": "ET-rc",
   "scripts": {
+    "postdeploy": "node clear_packages.js && curl -n -X DELETE https://api.heroku.com/apps/${HEROKU_APP_NAME}/dynos   -H \"Content-Type: application/json\"   -H \"Accept: application/vnd.heroku+json; version=3\" -H \"Authorization: Bearer ${HEROKU_API_TOKEN}\""
   },
   "env": {
+    "HEROKU_APP_NAME": {
+      "required": true
+    },
+    "HEROKU_PARENT_APP_NAME": {
+        "required": true
+    },
     "BUILDPACK_PRELAUNCH_METEOR": {
+      "required": true
+    },
+    "BUILDPACK_CLEAR_CACHE": {
+      "required": true
+    },
+    "BUILDPACK_PRELAUNCH_REACTION": {
+      "required": true
+    },
+    "REACTION_TIMEOUT": {
       "required": true
     },
     "MONGODB_URI": {
@@ -13,6 +29,9 @@
       "required": true
     },
     "ROOT_URL": {
+      "required": true
+    },
+    "HEROKU_API_TOKEN": {
       "required": true
     }
   },
@@ -27,7 +46,10 @@
   ],
   "buildpacks": [
     {
-      "url": "https://github.com/swrdfish/meteor-buildpack-horse.git"
+      "url": "https://github.com/heroku/heroku-buildpack-cli"
+    },
+    {
+      "url": "https://github.com/Zanobo/reaction-buildpack.git"
     }
   ]
 }
