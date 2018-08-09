@@ -2,14 +2,9 @@ h2 {
     color: white;
 }
 
-/* .caption{
-    position: relative;
-    top: 30vh;
-    z-index: 10;
-    color:white;
-    text-align: center;
-    font-size: 50px;
-  } */
+.carousel-caption{
+    top: 25%;
+  } 
   .header-overlay {
     background-color: #000;
     height: 100%;
@@ -27,4 +22,13 @@ h2 {
 
   .carousel-caption p {
     font-size: 1vw;
+}
+.shop-now {
+    background-color: transparent;
+    border: 1px solid;
+}
+
+.shop-now:hover {
+  background-color: #7e3794;
+  color: white;
 }
