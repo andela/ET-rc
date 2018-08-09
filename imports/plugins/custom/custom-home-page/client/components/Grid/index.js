@@ -1,17 +1,20 @@
 import React from "react";
-import { Components, getComponent } from "/imports/plugins/core/components/lib";
-import TwoSidedGrid from './components/'
+import { getComponent } from "/imports/plugins/core/components/lib";
+import TwoSidedGrid from "./components/";
+import RenderAdvantageOfApplication from "./components/AdvantageOfApplication";
+import VendOnEtWorld from "./components/VendOnET";
 import "./index.css";
 
-console.log(Components.Products)
 
-const Products = getComponent("Products")
+const Products = getComponent("Products");
 
 const Grid = () => {
   return (
-    <div style={{ minHeight: '600px', width: "100%"}}>
+    <div style={{ minHeight: "650px", width: "100%"  }}>
+      <RenderAdvantageOfApplication />
       <TwoSidedGrid />
       <Products />
+      <VendOnEtWorld />
     </div>
   );
 };

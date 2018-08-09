@@ -18,13 +18,16 @@
 }
 
 .entry-div {
+    img {
+        transition: .2s;
+    }
     &:hover {
         cursor: pointer;
-        div {
+        .product-view-overlay {
             background-color: #11111090;
         }
         img {
-            transform: scale(1.01)
+            transform: scale(1.008)
         }
     }
 }
