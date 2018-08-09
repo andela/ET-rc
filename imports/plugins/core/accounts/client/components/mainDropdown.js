@@ -102,7 +102,7 @@ class MainDropdown extends Component {
 
   render() {
     return (
-      <div className="accounts">
+      <div className="accounts" id="register">
         {this.props.currentAccount ?
           <div style={{ paddingRight: 5 }}>
             <Components.DropDownMenu
