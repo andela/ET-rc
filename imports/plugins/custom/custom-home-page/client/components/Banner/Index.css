@@ -1,0 +1,30 @@
+h2 {
+    color: white;
+}
+
+/* .caption{
+    position: relative;
+    top: 30vh;
+    z-index: 10;
+    color:white;
+    text-align: center;
+    font-size: 50px;
+  } */
+  .header-overlay {
+    background-color: #000;
+    height: 100%;
+    left: 0;
+    opacity: .5;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 10;
+  }
+
+  .carousel-caption h2 {
+      font-size: 3vw;
+  }
+
+  .carousel-caption p {
+    font-size: 1vw;
+}
