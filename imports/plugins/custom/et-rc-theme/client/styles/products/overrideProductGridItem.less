@@ -1,0 +1,30 @@
+.container-main {
+    background-color: #F2F3F4;
+    .product-grid-item {
+        .product-grid-item-images {
+            height: 260px;
+        }
+        .overlay {
+            height: 100px;
+            background-color: white;
+            border-bottom-left-radius: 2px;
+            border-bottom-right-radius: 2px;
+            padding-top: 10px;
+            .overlay-title {
+                color: #3D3D3C;
+            }
+        }
+    } 
+}
+
+.entry-div {
+    &:hover {
+        cursor: pointer;
+        div {
+            background-color: #11111090;
+        }
+        img {
+            transform: scale(1.01)
+        }
+    }
+}
