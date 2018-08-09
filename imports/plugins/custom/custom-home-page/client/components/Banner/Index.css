@@ -1,5 +1,10 @@
-h2 {
+.carousel-caption h2 {
     color: white;
+}
+
+.container-fluid {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
 }
 
 .carousel-caption{
