@@ -52,5 +52,11 @@ Meteor.methods({
     check(_id, String);
     const gottenPage = Collections.StaticPages.findOne(_id);
     return gottenPage;
+  },
+
+  // get all details: function
+  getAllStaticPage() {
+    const gottenPages = Collections.StaticPages.find({});
+    return gottenPages;
   }
 });
