@@ -29,7 +29,7 @@ const Banner = () => {
             <div className="header-overlay" />
             <img src="/images/banner_2.jpg" alt="New york" style={{ width: "100%" }} />
             <div className="carousel-caption">
-              <h2>The New Standard Electyronics</h2> <br />
+              <h2>The New Standard Electronics</h2> <br />
               <button className="btn btn-lg shop-now">Shop Now </button>
             </div>
           </div>
