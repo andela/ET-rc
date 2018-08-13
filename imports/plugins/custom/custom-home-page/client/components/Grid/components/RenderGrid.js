@@ -1,6 +1,11 @@
 import React from "react";
 import { Router } from "/client/api";
 
+/**
+ * Shop Collection Grid
+ *
+ * @returns {JSX}
+ */
 const ShopCollectionsLandingGrid  = () => (
   <div
     style={{
@@ -22,6 +27,7 @@ const ShopCollectionsLandingGrid  = () => (
         marginRight: "3px"
       }}
       onClick={() => { Router.go("/tag/shop"); }}
+      onKeyPress={() => { Router.go("/tag/shop"); }}
     >
       { /* Image and overlay */}
       <div style={{
@@ -30,12 +36,14 @@ const ShopCollectionsLandingGrid  = () => (
         position: "relative"
       }}
       >
-        <img style={{
-          height: "100%",
-          width: "100%",
-          objectFit: "cover"
-        }}
-        src="/resources/image-one.jpeg"
+        <img
+          style={{
+            height: "100%",
+            width: "100%",
+            objectFit: "cover"
+          }}
+          src="/resources/image-one.jpeg"
+          alt="product"
         />
         <div
           className="product-view-overlay"
@@ -69,14 +77,17 @@ const ShopCollectionsLandingGrid  = () => (
           fontWeight: "bold",
           color: "#333"
         }}
-        > Shop Phones & Tablets </p>
+        >
+          Shop Phones & Tablets
+        </p>
         <p style={{
           fontSize: "13px",
           color: "#464645",
           width: "100%"
         }}
-        > Enjoy our special curation of phones and tabs for you,
-              ranging from the iPhone X, One Plus 6, The iPad Pro and many more
+        >
+          Enjoy our special curation of phones and tabs for you,
+          ranging from the iPhone X, One Plus 6, The iPad Pro and many more
         </p>
       </div>
 
@@ -90,6 +101,7 @@ const ShopCollectionsLandingGrid  = () => (
         marginRight: "3px"
       }}
       onClick={() => { Router.go("/tag/shop"); }}
+      onKeyPress={() => { Router.go("/tag/shop"); }}
     >
       { /* Image and overlay */}
       <div style={{
@@ -98,12 +110,14 @@ const ShopCollectionsLandingGrid  = () => (
         position: "relative"
       }}
       >
-        <img style={{
-          height: "100%",
-          width: "100%",
-          objectFit: "cover"
-        }}
-        src="/resources/image-two.jpeg"
+        <img
+          style={{
+            height: "100%",
+            width: "100%",
+            objectFit: "cover"
+          }}
+          src="/resources/image-two.jpeg"
+          alt="product"
         />
         <div
           className="product-view-overlay"
@@ -137,14 +151,17 @@ const ShopCollectionsLandingGrid  = () => (
           fontWeight: "bold",
           color: "#333"
         }}
-        > Shop Drones and VR Headsets </p>
+        >
+          Shop Drones and VR Headsets
+        </p>
         <p style={{
           fontSize: "13px",
           color: "#464645",
           width: "100%"
         }}
-        > Enjoy our special curation of phones and tabs for you,
-              ranging from the iPhone X, One Plus 6, The iPad Pro and many more
+        >
+          Enjoy our special curation of phones and tabs for you,
+          ranging from the iPhone X, One Plus 6, The iPad Pro and many more
         </p>
       </div>
 

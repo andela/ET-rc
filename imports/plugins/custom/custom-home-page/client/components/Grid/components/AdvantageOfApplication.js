@@ -1,5 +1,10 @@
 import React from "react";
 
+/**
+ * Render advantage of the application
+ *
+ * @returns {JSX}
+ */
 const RenderAdvantageOfApplication = () => (
   <div style={{
     height: "80px",

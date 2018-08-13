@@ -4,6 +4,4 @@ import { Meteor } from "meteor/meteor";
 /**
  * Static Pages
  */
-Meteor.publish("StaticPagesServer", function () {
-  return StaticPages.find({});
-});
+Meteor.publish("StaticPagesServer", () => StaticPages.find({}));

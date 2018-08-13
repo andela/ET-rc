@@ -1,5 +1,10 @@
 import React from "react";
 
+/**
+ * Renders a section above the grid
+ *
+ * @returns {JSX}
+ */
 const AlwaysBeenAboutYou = () => (
   <div
     style={{
@@ -19,9 +24,9 @@ const AlwaysBeenAboutYou = () => (
         marginBottom: "20px",
         float: "left",
         paddingLeft: "20px"
-        
       }}
-    > #FORTHELOVEOFGADGETS
+    >
+      #FORTHELOVEOFGADGETS
     </p>
     <div
       style={{
@@ -45,7 +50,7 @@ const AlwaysBeenAboutYou = () => (
           marginBottom: "15px"
         }}
       >
-          IT'S ALWAYS BEEN ABOUT YOU
+        {"IT'S ALWAYS BEEN ABOUT YOU"}
       </p>
       { /* */}
       <p
@@ -56,10 +61,10 @@ const AlwaysBeenAboutYou = () => (
           width: "80%"
         }}
       >
-            Why do we do what we do? Why do we curate the best electronic gadgets
-            across the globe to serve on a plate to you? Because we believe human experience
-            is made significantly better with these awesome gadgets, so, why not?
-            Shop ET World. Expericence different
+        Why do we do what we do? Why do we curate the best electronic gadgets
+        across the globe to serve on a plate to you? Because we believe human experience
+        is made significantly better with these awesome gadgets, so, why not?
+        Shop ET World. Experience different
       </p>
       <div
         style={{

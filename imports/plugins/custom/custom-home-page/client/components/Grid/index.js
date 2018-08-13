@@ -8,6 +8,9 @@ import "./index.css";
 
 const Products = getComponent("Products");
 
+/**
+ * Grid of products on the shop
+ */
 const Grid = () => {
   return (
     <div style={{ minHeight: "650px", width: "100%"  }}>

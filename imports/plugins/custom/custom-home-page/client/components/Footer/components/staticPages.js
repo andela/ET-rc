@@ -19,13 +19,14 @@ class Footer extends Component {
   componentDidMount = () => {
     this.setState({ pages: this.props.pages });
   }
-  visitThisPage(page) {
-    return Reaction.Router.go(`/info/${page.pageURLAddress}`);
-  }
 
   componentDidUpdate = (prevProps) => {
     if (this.props.pages.length === prevProps.pages.length) return;
     return this.setState({ pages: this.props.pages });
+  }
+
+  visitThisPage(page) {
+    return Reaction.Router.go(`/info/${page.pageURLAddress}`);
   }
 
   renderStaticPagesComponent() {
@@ -52,15 +53,13 @@ class Footer extends Component {
           );
         })}
       </div>);
-    const output = pages && pages.length ? realPages :  fakePages;
+    const output = pages && pages.length ? realPages : fakePages;
     return (
       output
     );
   }
 
   render() {
-    const { pages } = this.state;
-
     return (
       <div className="footer-content">
         <div className="footer-container">
