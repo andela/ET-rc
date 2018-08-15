@@ -1,0 +1,39 @@
+.carousel-caption h2 {
+    color: white;
+}
+
+.container-fluid {
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+}
+
+.carousel-caption{
+    top: 25%;
+  } 
+  .header-overlay {
+    background-color: #000;
+    height: 100%;
+    left: 0;
+    opacity: .5;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 10;
+  }
+
+  .carousel-caption h2 {
+      font-size: 3vw;
+  }
+
+  .carousel-caption p {
+    font-size: 1vw;
+}
+.shop-now {
+    background-color: transparent;
+    border: 1px solid;
+}
+
+.shop-now:hover {
+  background-color: #7e3794;
+  color: white;
+}

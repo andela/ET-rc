@@ -7,3 +7,9 @@
 .section p {
   text-align: justify;
 }
+
+.static-title {
+  color: black;
+    font-size: 40px;
+    font-weight: 600;
+}
