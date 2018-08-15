@@ -19,9 +19,6 @@
     "BUILDPACK_PRELAUNCH_REACTION": {
       "required": true
     },
-    "MONGODB_URI": {
-      "required": true
-    },
     "REACTION_TIMEOUT": {
       "required": true
     },

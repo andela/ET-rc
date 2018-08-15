@@ -16,7 +16,7 @@ const getAdminUserId = () => {
 const sendNotificationToAdmin = (adminId) => {
   const type = "forAdmin";
   const prefix = Reaction.getShopPrefix();
-  const url = `${prefix}/dashboard/orders`;
+  const url = `/shop${prefix}/dashboard/orders`;
   const sms = true;
   // Sending notification to admin
   Logger.debug("sending notification to admin");
@@ -27,7 +27,7 @@ MethodHooks.after("cart/copyCartToOrder", function (options) {
   const userId = Meteor.userId();
   const type = "newOrder";
   const prefix = Reaction.getShopPrefix();
-  const url = `${prefix}/notifications`;
+  const url = `/shop${prefix}/notifications`;
   const sms = true;
 
   // Send notification to user who made the order
