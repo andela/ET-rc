@@ -12,7 +12,11 @@ class PaystackSettingsFormContainer extends Component {
     super(props);
 
     this.state = {
+<<<<<<< HEAD
       apiKey: "278302390293"
+=======
+      publickey: ""
+>>>>>>> fffc21904... feat: Paystack integration
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -32,11 +36,17 @@ class PaystackSettingsFormContainer extends Component {
     const settingsKey = this.props.packageData.registry[0].settingsKey;
 
     const fields = [{
-      property: "apiKey",
-      value: settings.apiKey
+      property: "publickey",
+      value: settings.publickey
     }, {
       property: "support",
       value: settings.support
+    }, {
+      property: "secretkey",
+      value: settings.secretkey
+    }, {
+      property: "testMode",
+      value: settings.testMode
     }];
 
     this.saveUpdate(fields, packageId, settingsKey);

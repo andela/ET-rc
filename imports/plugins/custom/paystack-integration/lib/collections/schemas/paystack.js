@@ -4,13 +4,23 @@ import { registerSchema } from "@reactioncommerce/reaction-collections";
 
 export const PaystackPackageConfig = new SimpleSchema([
   PackageConfig, {
-    "settings.mode": {
+    "settings.paystack.mode": {
       type: Boolean,
       defaultValue: true
     },
-    "settings.apiKey": {
+    "settings.paystack.publickey": {
       type: String,
-      label: "API Key",
+      label: "API Public Key",
+      optional: true
+    },
+    "settings.paystack.secretkey": {
+      type: String,
+      label: "API secret key",
+      optional: true
+    },
+    "settings.paystack.testMode": {
+      type: Boolean,
+      label: "API test mode",
       optional: true
     }
   }
@@ -21,28 +31,13 @@ registerSchema("PaystackPackageConfig", PaystackPackageConfig);
 export const PaystackPayment = new SimpleSchema({
   payerName: {
     type: String,
-    label: "Cardholder name"
+    label: "Cardholder name",
+    optional: true
   },
-  cardNumber: {
+  payerEmail: {
     type: String,
-    min: 13,
-    max: 16,
-    label: "Card number"
-  },
-  expireMonth: {
-    type: String,
-    max: 2,
-    label: "Expiration month"
-  },
-  expireYear: {
-    type: String,
-    max: 4,
-    label: "Expiration year"
-  },
-  cvv: {
-    type: String,
-    max: 4,
-    label: "CVV"
+    label: "Cardholder email",
+    optional: true
   }
 });
 

@@ -1,15 +1,21 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import _ from "lodash";
+<<<<<<< HEAD
 import { TextField, Translation, Checkbox } from "/imports/plugins/core/ui/client/components";
+=======
+import { TextField, Translation, Checkbox, Switch } from "/imports/plugins/core/ui/client/components";
+>>>>>>> fffc21904... feat: Paystack integration
 
 class PaystackSettingsForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       settings: {
-        apiKey: props.settings.apiKey,
-        support: props.settings.support
+        publickey: props.settings.publickey,
+        support: props.settings.support,
+        secretkey: props.settings.secretkey,
+        testMode: props.settings.testMode
       },
       checkbox: {
         "Authorize": _.includes(props.settings.support, "Authorize"),
@@ -39,6 +45,12 @@ class PaystackSettingsForm extends Component {
     return this.setState({ settings });
   }
 
+  handleSwitch = (event, isInputChecked, name) => {
+    const { settings } = this.state;
+    settings[name] = !this.state.settings.testMode;
+    this.setState({ settings });
+  }
+
   handleSubmit = (e) => {
     e.preventDefault();
     return this.props.onSubmit(this.state.settings);
@@ -59,6 +71,7 @@ class PaystackSettingsForm extends Component {
 
         <form onSubmit={this.handleSubmit}>
           <TextField
+<<<<<<< HEAD
             label="API Key"
             name="apiKey"
             type="text"
@@ -66,6 +79,31 @@ class PaystackSettingsForm extends Component {
             value={setting.apiKey}
           />
 
+=======
+            label="Secret Key"
+            name="secretkey"
+            type="text"
+            onChange={this.handleStateChange}
+            value={setting.secretkey}
+          />
+
+          <TextField
+            label="Public Key"
+            name="publickey"
+            type="text"
+            onChange={this.handleStateChange}
+            value={setting.publickey}
+          />
+
+          <Switch
+            label="Api test mode"
+            onChange={this.handleSwitch}
+            name="testMode"
+            checked={this.state.settings.testMode}
+          />
+
+          <br/>
+>>>>>>> fffc21904... feat: Paystack integration
           <label className="control-label">
             <Translation defaultValue="Payment provider supported methods" i18nKey="reaction-payments.paymentSettings.supportedMethodsLabel"/>
           </label>
