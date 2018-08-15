@@ -352,7 +352,7 @@ export const methods = {
 
     // send notification to user
     const prefix = Reaction.getShopPrefix();
-    const url = `${prefix}/notifications`;
+    const url = `/shop${prefix}/notifications`;
     const sms = true;
     Meteor.call("notification/send", order.userId, "orderCanceled", url, sms, (err) => {
       if (err) Logger.error(err);

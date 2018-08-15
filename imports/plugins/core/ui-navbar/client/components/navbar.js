@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { Components } from "@reactioncommerce/reaction-components";
 import { Meteor } from "meteor/meteor";
+import { Reaction } from "../../../../../../client/api";
 import startCustomerTour from "../../../../included/customerTour/intro";
 
 // TODO: Delete this, and do it the react way - Mike M.
@@ -48,6 +49,21 @@ class NavBar extends Component {
   startTour = (e) => {
     e.preventDefault();
     startCustomerTour();
+  }
+
+  /* Add a button to the account dropdown.
+   Clicking this button should take a user the order page */
+  renderShowOrdersButton() {
+    if (this.props.hasProperPermission) {
+      return (
+        <Components.FlatButton
+          icon="fa fa-sun-o dropdown-extra"
+          kind="flat"
+          label=" My Orders"
+          onClick={() => Reaction.Router.go("/orders")}
+        />
+      );
+    }
   }
 
   renderLanguage() {
@@ -169,6 +185,7 @@ class NavBar extends Component {
         {this.renderNotificationIcon()}
         {this.renderLanguage()}
         {this.renderCurrency()}
+        {this.renderShowOrdersButton()}
         {this.renderMainDropdown()}
         {this.renderCartContainerAndPanel()}
       </div>
