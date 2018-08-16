@@ -174,6 +174,15 @@ export default function blocks() {
         },
 
         // Alerts for checkout
+        
+        {
+          component: "AlertContainer",
+          props: {
+            placement: "productDetail"
+          }
+        },
+
+        // Alerts for checkout
         {
           component: "AlertContainer",
           props: {
@@ -189,6 +198,11 @@ export default function blocks() {
               paddingTop: 20
             }
           }
+        },
+
+        // Add Reviews component
+        {
+          component: "Reviews"
         }
 
       ]
