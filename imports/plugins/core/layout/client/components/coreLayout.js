@@ -7,7 +7,6 @@ import { Template } from "meteor/templating";
 
 const CoreLayout = ({ actionViewIsOpen, structure }) => {
   const { layoutFooter, template } = structure || {};
-
   const pageClassName = classnames({
     "page": true,
     "show-settings": actionViewIsOpen

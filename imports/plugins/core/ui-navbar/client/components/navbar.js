@@ -150,7 +150,7 @@ class NavBar extends Component {
       </div>
     );
   }
-  
+
   renderStaticPages() {
     return (
       <Components.StaticPages />
