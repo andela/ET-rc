@@ -1,20 +1,20 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import _ from "lodash";
-<<<<<<< HEAD
-import { TextField, Translation, Checkbox } from "/imports/plugins/core/ui/client/components";
-=======
 import { TextField, Translation, Checkbox, Switch } from "/imports/plugins/core/ui/client/components";
->>>>>>> fffc21904... feat: Paystack integration
 
+/**
+ * Renders the Paystack setting form on the action bar
+ * @class PaystackSettingsForm
+ */
 class PaystackSettingsForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
       settings: {
-        publickey: props.settings.publickey,
+        publicKey: props.settings.publicKey,
         support: props.settings.support,
-        secretkey: props.settings.secretkey,
+        secretKey: props.settings.secretKey,
         testMode: props.settings.testMode
       },
       checkbox: {
@@ -26,12 +26,28 @@ class PaystackSettingsForm extends Component {
     };
   }
 
+  /**
+   * Handle state change
+   * @memberof PaystackSettingsForm
+   *
+   * @param {object<event>} e Event object
+   */
   handleStateChange = (e) => {
     const { settings } = this.state;
     settings[e.target.name] = e.target.value;
     this.setState({ settings });
   }
 
+  /**
+   * Handle checkbox
+   * @memberof PaystackSettingsForm
+   *
+   * @param {object} event
+   * @param {boolean} isInputChecked
+   * @param {string} name
+   *
+   * @returns {object} New checkbox state
+   */
   handleCheckBox = (event, isInputChecked, name) => {
     const { checkbox, settings } = this.state;
     checkbox[name] = isInputChecked;
@@ -45,69 +61,77 @@ class PaystackSettingsForm extends Component {
     return this.setState({ settings });
   }
 
+  /**
+   * Handle switch change
+   * @memberof PaystackSettingsForm
+   *
+   * @param {object} event
+   * @param {boolean} isInputChecked
+   * @param {string} name
+   */
   handleSwitch = (event, isInputChecked, name) => {
     const { settings } = this.state;
     settings[name] = !this.state.settings.testMode;
     this.setState({ settings });
   }
 
+  /**
+   * Handle form submit
+   *
+   * @param {object} event
+   *
+   * @returns Promise
+   */
   handleSubmit = (e) => {
     e.preventDefault();
     return this.props.onSubmit(this.state.settings);
   }
 
 
+  /**
+   * Renders PaystackSettingsForm component
+   */
   render() {
     const { settings } = this.props;
     const setting = this.state.settings;
 
     return (
       <div>
-        { !settings.apiKey &&
+        { !settings.publicKey &&
           <div className="alert alert-info">
-            <Translation defaultValue="Paystack Credentials" i18nKey="admin.paymentSettings.paystackCredentials"/>
+            <Translation defaultValue="Paystack Credentials" i18nKey="admin.paymentSettings.paystackCredentials" />
           </div>
         }
 
         <form onSubmit={this.handleSubmit}>
           <TextField
-<<<<<<< HEAD
-            label="API Key"
-            name="apiKey"
-            type="text"
-            onChange={this.handleStateChange}
-            value={setting.apiKey}
-          />
-
-=======
             label="Secret Key"
-            name="secretkey"
+            name="secretKey"
             type="text"
             onChange={this.handleStateChange}
-            value={setting.secretkey}
+            value={setting.secretKey}
           />
 
           <TextField
             label="Public Key"
-            name="publickey"
+            name="publicKey"
             type="text"
             onChange={this.handleStateChange}
-            value={setting.publickey}
+            value={setting.publicKey}
           />
 
           <Switch
             label="Api test mode"
             onChange={this.handleSwitch}
             name="testMode"
-            checked={this.state.settings.testMode}
+            checked={setting.testMode}
           />
 
-          <br/>
->>>>>>> fffc21904... feat: Paystack integration
-          <label className="control-label">
-            <Translation defaultValue="Payment provider supported methods" i18nKey="reaction-payments.paymentSettings.supportedMethodsLabel"/>
+          <br />
+          <label className="control-label" htmlFor="providers">
+            <Translation defaultValue="Payment provider supported methods" i18nKey="reaction-payments.paymentSettings.supportedMethodsLabel" />
           </label>
-          <br/>
+          <br />
 
           <div>
             <Checkbox
@@ -147,7 +171,7 @@ class PaystackSettingsForm extends Component {
 
 
           <button className="btn btn-primary pull-right" type="submit">
-            <Translation defaultValue="Save Changes" i18nKey="app.saveChanges"/>
+            <Translation defaultValue="Save Changes" i18nKey="app.saveChanges" />
           </button>
         </form>
 
@@ -157,9 +181,8 @@ class PaystackSettingsForm extends Component {
 }
 
 PaystackSettingsForm.propTypes = {
-  onChange: PropTypes.func.isRequired,
   onSubmit: PropTypes.func.isRequired,
-  settings: PropTypes.object
+  settings: PropTypes.object.isRequired
 };
 
 export default PaystackSettingsForm;

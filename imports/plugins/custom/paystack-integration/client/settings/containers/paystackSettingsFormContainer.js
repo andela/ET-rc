@@ -7,43 +7,38 @@ import { TranslationProvider } from "/imports/plugins/core/ui/client/providers";
 import { Reaction, i18next } from "/client/api";
 import { PaystackSettingsForm } from "../components";
 
+/**
+ * Renders the PaystackSettingsForm component
+ * @class PaystackSettingsFormContainer
+ */
 class PaystackSettingsFormContainer extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-<<<<<<< HEAD
-      apiKey: "278302390293"
-=======
-      publickey: ""
->>>>>>> fffc21904... feat: Paystack integration
-    };
-
-    this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.saveUpdate = this.saveUpdate.bind(this);
   }
 
-  handleChange(e) {
-    e.preventDefault();
-    this.setState({ apiKey: e.target.value });
-  }
-
+  /**
+   * Handle submit action
+   *
+   * @param {object} settings
+   */
   handleSubmit(settings) {
     // e.preventDefault();
 
     const packageId = this.props.packageData._id;
-    const settingsKey = this.props.packageData.registry[0].settingsKey;
+    const { settingsKey } = this.props.packageData.registry[0];
 
     const fields = [{
-      property: "publickey",
-      value: settings.publickey
+      property: "publicKey",
+      value: settings.publicKey
     }, {
       property: "support",
       value: settings.support
     }, {
-      property: "secretkey",
-      value: settings.secretkey
+      property: "secretKey",
+      value: settings.secretKey
     }, {
       property: "testMode",
       value: settings.testMode
@@ -52,6 +47,15 @@ class PaystackSettingsFormContainer extends Component {
     this.saveUpdate(fields, packageId, settingsKey);
   }
 
+  /**
+   * Save updates to the registry
+   *
+   * @param {Array} fields
+   * @param {Number} id
+   * @param {string} settingsKey
+   *
+   * @returns {object} Toast alerts
+   */
   saveUpdate(fields, id, settingsKey) {
     Meteor.call("registry/update", id, settingsKey, fields, (err) => {
       if (err) {
@@ -61,12 +65,14 @@ class PaystackSettingsFormContainer extends Component {
     });
   }
 
+  /**
+   * Renders the PaystackSettingsFormContainer
+   */
   render() {
-    const settingsKey = this.props.packageData.registry[0].settingsKey;
+    const { settingsKey } = this.props.packageData.registry[0];
     return (
       <TranslationProvider>
         <PaystackSettingsForm
-          onChange={this.handleChange}
           onSubmit={this.handleSubmit}
           settings={this.props.packageData.settings[settingsKey]}
         />
@@ -76,7 +82,7 @@ class PaystackSettingsFormContainer extends Component {
 }
 
 PaystackSettingsFormContainer.propTypes = {
-  packageData: PropTypes.object
+  packageData: PropTypes.object.isRequired
 };
 
 const composer = ({}, onData) => {

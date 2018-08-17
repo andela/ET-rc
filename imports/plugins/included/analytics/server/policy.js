@@ -9,3 +9,4 @@ BrowserPolicy.content.allowOriginForAll("connect.facebook.net");
 BrowserPolicy.content.allowOriginForAll("fonts.googleapis.com");
 BrowserPolicy.content.allowOriginForAll("fonts.gstatic.com");
 BrowserPolicy.content.allowOriginForAll("http://js.paystack.co");
+BrowserPolicy.content.allowOriginForAll("https://paystack.com/");

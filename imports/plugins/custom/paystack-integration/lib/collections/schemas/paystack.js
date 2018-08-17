@@ -8,12 +8,12 @@ export const PaystackPackageConfig = new SimpleSchema([
       type: Boolean,
       defaultValue: true
     },
-    "settings.paystack.publickey": {
+    "settings.paystack.publicKey": {
       type: String,
       label: "API Public Key",
       optional: true
     },
-    "settings.paystack.secretkey": {
+    "settings.paystack.secretKey": {
       type: String,
       label: "API secret key",
       optional: true

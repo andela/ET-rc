@@ -509,7 +509,7 @@
       "scale": 0
     }
   },
-  "currency": "USD",
+  "currency": "NGN",
   "languages": [
     {
       "label": "العربية",
@@ -3164,13 +3164,13 @@
       }
     }
   },
-  "name": "Reaction",
+  "name": "ET World",
   "taxes": [{
     "taxesIncluded": null,
     "taxShipping": null,
     "countyTaxes": true
   }],
-  "timezone": "US/Pacific",
+  "timezone": "Africa/Lagos",
   "baseUOL": "in",
   "unitsOfLength": [{
     "uol": "in",
@@ -3199,15 +3199,15 @@
     "label": "Kilograms"
   }],
   "addressBook": [{
-    "company": "Reaction Commerce",
-    "fullName": "Ongo Works",
-    "address1": "2110 Main Street",
-    "address2": "Suite 207",
-    "city": "Santa Monica",
-    "region": "CA",
+    "company": "ET World",
+    "fullName": "ET World",
+    "address1": "124, Ikorodu Road",
+    "address2": "Epic Towers",
+    "city": "Ilupeju",
+    "region": "LOS",
     "postal": "90405",
-    "country": "US",
-    "phone": "8885551212",
+    "country": "NG",
+    "phone": "2348085551234",
     "isCommercial": true,
     "isShippingDefault": true,
     "isBillingDefault": true

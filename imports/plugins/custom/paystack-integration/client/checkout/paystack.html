@@ -11,9 +11,9 @@
 
     <div class="form-group{{#if afFieldIsInvalid name='cardNumber'}} has-error{{/if}}">
         <label class="control-label">{{afFieldLabelText name='payerEmail'}}</label>
-        {{>afFieldInput name="cardNumber" placeholder='XXXX XXXX XXXX XXXX'}}
-        {{#if afFieldIsInvalid name="cardNumber"}}
-        <span class="help-block">{{afFieldMessage name="cardNumber"}}</span>
+        {{>afFieldInput name="payerEmail" placeholder='email@domain.com'}}
+        {{#if afFieldIsInvalid name="payerEmail"}}
+        <span class="help-block">{{afFieldMessage name="payerEmail"}}</span>
         {{/if}}
     </div>
   </div>
