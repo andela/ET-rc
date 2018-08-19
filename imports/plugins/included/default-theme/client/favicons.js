@@ -19,13 +19,13 @@ const linkTags = [
     rel: "icon",
     type: "image/png",
     sizes: "32x32",
-    href: basePath + "favicon-32x32.png"
+    href: "/images/etrc-logo.png" // basePath + "favicon-32x32.png"
   },
   {
     rel: "icon",
     type: "image/png",
     sizes: "16x16",
-    href: basePath + "favicon-16x16.png"
+    href: "/images/etrc-logo.png" // basePath + "favicon-16x16.png"
   },
   {
     rel: "manifest",
@@ -38,7 +38,7 @@ const linkTags = [
   },
   {
     rel: "shortcut icon",
-    href: basePath + "favicon.ico"
+    href: "/images/etrc-logo.png" // basePath + "favicon.ico"
   }
 ];
 
