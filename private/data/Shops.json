@@ -509,7 +509,7 @@
       "scale": 0
     }
   },
-  "currency": "USD",
+  "currency": "NGN",
   "languages": [
     {
       "label": "العربية",
@@ -1979,7 +1979,6 @@
         "name": "Moldova",
         "native": "Moldova",
         "phone": "373",
-        "continent": "EU",
         "capital": "Chișinău",
         "currency": "MDL",
         "languages": "ro"
