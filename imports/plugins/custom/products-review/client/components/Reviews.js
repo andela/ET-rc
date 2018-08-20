@@ -12,6 +12,7 @@ import Pagination from "react-js-pagination";
  * @classdesc user post review
  *
  */
+const limit = 5;
 class Reviews extends Component {
   /**
    * constructor - contains the constructor
@@ -30,9 +31,8 @@ class Reviews extends Component {
       disableBtn: true,
       reviews: "",
       totalCount: 0,
-      totalRating: 0,
-      activePage: 1,
-      paginatedReviews: []
+      averageRating: 0,
+      activePage: 1
     };
     this.onChange = this.onChange.bind(this);
     this.ratingChanged = this.ratingChanged.bind(this);
@@ -47,13 +47,12 @@ class Reviews extends Component {
 */
   componentDidMount() {
     const destination = this.props.product._id;
-    let totalRating = 0;
-    Meteor.call("getAllReviews", destination, (error, response) => {
+    const reviewQuery = { limit, skip: 0, destination };
+    Meteor.call("getAllReviews", reviewQuery, (error, response) => {
       if (error) {
         return error;
       }
-      response.forEach(eachRating => { totalRating += Number(eachRating.rating);});
-      this.setState({ reviews: response, paginatedReviews: response.slice(0, 5), totalCount: response.length, totalRating });
+      this.setState({ reviews: response.reviews, totalCount: response.count, averageRating: response.averageRating });
     });
   }
   /**
@@ -80,15 +79,22 @@ class Reviews extends Component {
   }
 
   handlePageChange(pageNumber) {
-    let limit = 5;
-    const offset = (pageNumber - 1) * limit;
-    limit += offset;
-    const paginatedReviews = this.state.reviews.slice(offset, limit);
-    this.setState({ activePage: pageNumber, paginatedReviews });
+    const destination = this.props.product._id;
+    const skip = (pageNumber - 1) * limit;
+    const reviewQuery = { limit, skip, destination };
+    Meteor.call("getAllReviews", reviewQuery, (error, result) => {
+      if (error) {
+        return error;
+      }
+      this.setState({ reviews: result.reviews,
+        activePage: pageNumber
+      });
+    });
+    this.setState({ activePage: pageNumber });
   }
 
   reviewList() {
-    const allReviews = this.state.paginatedReviews;
+    const allReviews = this.state.reviews;
     if (allReviews.length === 0) {
       return (<div className="reviews-contents">No reviews yet.</div>);
     }
@@ -159,15 +165,16 @@ class Reviews extends Component {
           return err;
         }
         if (response) {
-          Meteor.call("getAllReviews", destination, (error, result) => {
+          const skip = (this.state.activePage - 1) * limit;
+          const reviewQuery = { limit, skip, destination };
+          Meteor.call("getAllReviews", reviewQuery, (error, result) => {
             if (error) {
               return error;
             }
-            this.setState({ reviews: result,
-              paginatedReviews: result.slice(0, 5),
-              activePage: 1,
-              totalCount: this.state.totalCount + 1,
-              totalRating: this.state.totalRating + Number(reviewObj.rating)
+            this.setState({
+              averageRating: result.averageRating,
+              reviews: result.reviews,
+              totalCount: result.count
             });
           });
           this.setState({
@@ -198,7 +205,7 @@ class Reviews extends Component {
                 size={10}
                 edit={false}
                 value={this.state.totalRating / this.state.totalCount}
-              /> <br /> <p className="rating-text"> {Math.round(((this.state.totalRating / this.state.totalCount) * 10) / 10).toFixed(1)} </p>
+              /> <br /> <p className="rating-text"> {(Math.round(this.state.averageRating * 10) / 10).toFixed(2)} </p>
               <br /><p>{this.state.totalCount} Reviews </p>
             </div>
           </div>

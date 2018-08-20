@@ -6,8 +6,10 @@ export const ReviewSchema = new SimpleSchema({
     optional: true
   },
   rating: {
-    type: String,
-    optional: true
+    type: Number,
+    optional: true,
+    decimal: true,
+    defaultValue: 0
   },
   review: {
     type: String,
