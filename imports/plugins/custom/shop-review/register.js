@@ -1,7 +1,7 @@
 import { Reaction } from "/server/api";
 
 Reaction.registerPackage({
-  name: "et-shop-reviews",
+  name: "et-shop-review",
   label: "et-shop-review",
   settings: {},
   autoEnable: true,

@@ -1,7 +1,8 @@
 import React from "react";
 import CustomButton from "../mixins/buttons";
+import Stars from "react-stars";
 
-const RenderShopDetails = ({ shop }) => (
+const RenderShopDetails = ({ shop, renderModal, shopRating }) => (
   <div
     style={{
       height: "250px",
@@ -15,7 +16,12 @@ const RenderShopDetails = ({ shop }) => (
   >
     <p style={{ fontSize: "18px", fontWeight: "700" }}> {  shop ? shop.name : "Test Name" }</p>
     <p style={{ fontSize: "15px" }}> {  shop ? shop.description : "This is a test description"}</p>
-    <CustomButton name="View Ratings" />
+    <Stars
+      count={5}
+      value={shopRating}
+      edit={false}
+    />
+    <CustomButton name="View Ratings" handleClick={renderModal} style={{ margin: 0 }}/>
   </div>
 );
 
