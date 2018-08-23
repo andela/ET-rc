@@ -1,9 +1,9 @@
 import { SimpleSchema } from "meteor/aldeed:simple-schema";
 import { registerSchema } from "@reactioncommerce/reaction-collections";
+
 export const Reviews = new SimpleSchema({
   username: {
-    type: String,
-    optional: true
+    type: String
   },
   rating: {
     type: Number,
