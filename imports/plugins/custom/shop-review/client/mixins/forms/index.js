@@ -3,7 +3,7 @@ import CustomButton from "../buttons";
 import RenderModal from "../modal";
 
 const RenderRatingsAndReviewForm = ({ handleSubmit, shopName }) => {
-  const RenderMainForm =  (
+  const RenderMainForm = (
     <div style={{
       height: "30%",
       width: "60%",
@@ -38,7 +38,7 @@ const RenderRatingsAndReviewForm = ({ handleSubmit, shopName }) => {
             bottom: "5px",
             right: "10px"
           }}
-          onClick={() => console.log('Hello there')}
+          onClick={handleSubmit}
         />
       </div>
 

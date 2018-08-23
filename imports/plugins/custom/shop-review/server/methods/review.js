@@ -10,25 +10,20 @@ Meteor.methods({
   "create.review"(reviewObject) {
     check(reviewObject, Object);
     return Reviews.insert(reviewObject);
+  },
+  "shop.average.rating"(destination) {
+    check(destination, String);
+    const result = Reviews.aggregate([
+      {
+        $match: { destination }
+      },
+      {
+        $group: {
+          _id: "$destination",
+          averageRating: { $avg: "$rating" }
+        }
+      }
+    ]);
+    return result[0].averageRating;
   }
-  // "shop.average.rating"(destination) {
-  //   check(destination, String);
-  //   const result = Reviews.aggregate([
-  //     {
-  //       $match: { destination }
-  //     },
-  //     {
-  //       $group: {
-  //         _id: "$destination",
-  //         averageRating: { $avg: "$rating" }
-  //       }
-  //     }
-  //   ]);
-  //   return result[0].averageRating;
-  // },
-  // "shop.details"(shopId) {
-  //   check(shopId, String);
-  //   const result = Shops.findOne({ _id: shopId });
-  //   return result;
-  // }
 });

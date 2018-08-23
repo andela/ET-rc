@@ -1,6 +1,6 @@
 import React from "react";
 
-const EtButton = ({ name, style }) => (
+const EtButton = ({ name, style, handleClick }) => (
   <button
     style={{
       height: "50px",
@@ -13,6 +13,7 @@ const EtButton = ({ name, style }) => (
       borderRadius: "3px",
       ...style
     }}
+    onClick={() => { handleClick && handleClick(); }}
   >
     {name}
   </button>
