@@ -1,5 +1,6 @@
 import { SimpleSchema } from "meteor/aldeed:simple-schema";
 import { registerSchema } from "@reactioncommerce/reaction-collections";
+
 export const ReviewSchema = new SimpleSchema({
   username: {
     type: String,
@@ -30,10 +31,10 @@ export const ReviewSchema = new SimpleSchema({
     type: Date,
     autoValue: function () {
       if (this.isInsert) {
-        return new Date;
+        return new Date();
       } else if (this.isUpsert) {
         return {
-          $setOnInsert: new Date
+          $setOnInsert: new Date()
         };
       }
     }
@@ -41,7 +42,7 @@ export const ReviewSchema = new SimpleSchema({
   updatedAt: {
     type: Date,
     autoValue: function () {
-      return new Date;
+      return new Date();
     }
   }
 });

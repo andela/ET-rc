@@ -174,7 +174,7 @@ export default function blocks() {
         },
 
         // Alerts for checkout
-        
+
         {
           component: "AlertContainer",
           props: {

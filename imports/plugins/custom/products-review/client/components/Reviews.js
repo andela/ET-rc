@@ -5,7 +5,7 @@ import "../stylesheet/style.css";
 import PropTypes from "prop-types";
 import moment from "moment";
 import Pagination from "react-js-pagination";
-// import toastrOption from "../../utils/toastrOption";
+
 /**
  * @class Review
  *
@@ -41,10 +41,12 @@ class Reviews extends Component {
     this.handlePageChange = this.handlePageChange.bind(this);
   }
   /**
- *
- * @returns { object } updated state
- * @memberof Ratings
-*/
+   * @description - React lifecycle method
+   *
+   * @param  {void}
+   *
+   * @return {void} Update state
+   */
   componentDidMount() {
     const destination = this.props.product._id;
     const reviewQuery = { limit, skip: 0, destination };
@@ -77,7 +79,13 @@ class Reviews extends Component {
     });
     return true;
   }
-
+  /**
+   * @description - handles the page change event
+   *
+   * @param  {object} event the event for the content field
+   *
+   * @return {void}
+   */
   handlePageChange(pageNumber) {
     const destination = this.props.product._id;
     const skip = (pageNumber - 1) * limit;
@@ -102,9 +110,9 @@ class Reviews extends Component {
       allReviews.map((review) => (
         <div key={review._id}>
           <div className="reviews-contents">
-            <a href="#" className="comment-author" title="Comment Author">
+            <div className="comment-author" title="Comment Author">
               <h4>{review.username}</h4>
-            </a>
+            </div>
             <p>{review.review}</p>
             <small className="text-muted">
               created at:
@@ -192,21 +200,25 @@ class Reviews extends Component {
    *
    */
   render() {
-    const { ratingChanged, onChange, addReview, reviewList } = this;
+    const {
+      ratingChanged, onChange, addReview, reviewList
+    } = this;
     return (
       <div>
         <div className="bus-info-reviews">
-          <h3><b>{this.state.totalCount && this.state.totalCount} Review{this.state.totalCount > 1 && "s"} and Rating{this.state.totalCount > 1 && "s"}</b></h3>
+          <h3><b>Reviews</b></h3>
           <div className="center-average">
-            <h3 className="average-rating">Average Rating</h3>
+            <h4 className="average-rating">Average Rating</h4>
             <div className="rts">
               <ReactStars
+                className="react-star-icons"
                 count={5}
-                size={10}
+                size={15}
                 edit={false}
-                value={this.state.totalRating / this.state.totalCount}
-              /> <br /> <p className="rating-text"> {(Math.round(this.state.averageRating * 10) / 10).toFixed(2)} </p>
-              <br /><p>{this.state.totalCount} Reviews </p>
+                value={this.state.averageRating}
+              />
+              <span className="rating-text"> {(Math.round(this.state.averageRating * 10) / 10).toFixed(1)} </span>
+              <span className="rating-total">  ({this.state.totalCount})</span>
             </div>
           </div>
           <div className="container-fluid">
@@ -216,7 +228,7 @@ class Reviews extends Component {
                   <div className="display-reviews">
                     { reviewList() }
                   </div>
-                  <div className="paginate text-center">
+                  {this.state.totalCount > 5 && <div className="paginate text-center">
                     <Pagination
                       activePage={this.state.activePage}
                       itemsCountPerPage={5}
@@ -224,7 +236,7 @@ class Reviews extends Component {
                       pageRangeDisplayed={5}
                       onChange={this.handlePageChange}
                     />
-                  </div>
+                  </div>}
                   <form
                     action="#"
                     method=""
@@ -232,6 +244,7 @@ class Reviews extends Component {
                     onSubmit={addReview}
                   >
                     <textarea
+                      className="review-textarea"
                       name="review"
                       value={this.state.review}
                       onChange={onChange}
@@ -250,7 +263,8 @@ class Reviews extends Component {
                     <button
                       type="submit"
                       disabled={this.state.disableBtn}
-                      className="btn send-button"
+                      // className="btn send-button"
+                      id="send-button"
                     >
                       Add review
                     </button>

@@ -1,9 +1,7 @@
-import {
-  Meteor
-} from "meteor/meteor";
-import { Reviews } from "../../lib/collections";
+import { Meteor } from "meteor/meteor";
 import { check } from "meteor/check";
-// import * as Collections from "/lib/collections";
+import { Reviews } from "../../lib/collections";
+
 /**
     * Methods
     * @param {Object}
@@ -29,7 +27,13 @@ Meteor.methods({
       { $match: { destination: reviewQuery.destination } },
       { $group: { _id: null, totalRating: { $sum: "$rating" } } }
     ]);
-    const averageRating = totalRating[0].totalRating / count;
+
+    let averageRating;
+    if (totalRating.length < 1) {
+      averageRating = 0;
+    } else {
+      averageRating = totalRating[0].totalRating / count;
+    }
     return { reviews, count, averageRating };
   }
 });
