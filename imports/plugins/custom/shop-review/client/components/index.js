@@ -16,6 +16,7 @@ export default class ShopLandingComponent extends Component {
       reviews: [],
       shopRating: 0
     };
+    this.handlePageChange = this.handlePageChange.bind(this);
   }
 
   componentDidMount = () => {
@@ -28,6 +29,12 @@ export default class ShopLandingComponent extends Component {
     Meteor.call("shop.average.rating", shopId, (_, shopRating) => this.setState({ shopRating }));
   }
 
+  handlePageChange(pageNo) {
+    const { getReviews } = this.props;
+    const offset = (pageNo - 1) * 5;
+    this.setState({ reviews: getReviews(offset) });
+  }
+
   renderModal = () => {
     if (!this.state.reviews) return; // you probably want to add a notification here;
     this.setState({ wantsToSeeModal: true });
@@ -35,8 +42,8 @@ export default class ShopLandingComponent extends Component {
 
 
   render() {
-    const { shopProducts, shopReviews } = this.props;
-    const { shopRating, shopInfo } = this.state;
+    const { shopProducts } = this.props;
+    const { shopRating, shopInfo, reviews } = this.state;
     return (
       <div
         style={{
@@ -47,7 +54,7 @@ export default class ShopLandingComponent extends Component {
         { !shopInfo && <NotFoundComponent /> }
         { shopInfo && (
           <div style={{ width: "100%", height: "100%" }}>
-            <RenderShopDetails shopRating={shopRating} shop={this.state.shopInfo} reviews={shopReviews} renderModal={this.renderModal}/>
+            <RenderShopDetails shopRating={shopRating} shop={this.state.shopInfo} reviews={reviews} renderModal={this.renderModal}/>
             <div style={{ height: "60%", marginTop: "5%" }}>
               <RenderShopProducts products={shopProducts} />
             </div>
@@ -55,7 +62,7 @@ export default class ShopLandingComponent extends Component {
               <RenderModal
                 closeModal={() => { this.setState({ wantsToSeeModal: false });}}
               >
-                <ShopReviewList reviews={shopReviews} />
+                <ShopReviewList reviews={reviews} handlePageChange={this.handlePageChange} />
               </RenderModal>
               : null
             }
