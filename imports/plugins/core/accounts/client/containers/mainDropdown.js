@@ -5,7 +5,7 @@ import { Accounts } from "meteor/accounts-base";
 import { Roles } from "meteor/alanning:roles";
 import { Session } from "meteor/session";
 import { Reaction, Logger } from "/client/api";
-import { i18nextDep, i18next } from  "/client/api";
+import { i18nextDep } from  "/client/api";
 import { Tags } from "/lib/collections";
 import MainDropdown from "../components/mainDropdown";
 import { getUserAvatar } from "/imports/plugins/core/accounts/client/helpers/helpers";
@@ -79,7 +79,7 @@ function handleChange(event, value) {
     });
   } else if (value.route === "/analytics") {
     return Reaction.Router.go("/analytics");
-  } else if (value.name !== "account/profile") {
+  } else if (value.name !== "account/profile" && value.name !== "wallet") {
     return Reaction.showActionView(value);
   } else if (value.route || value.name) {
     const route = value.name || value.route;

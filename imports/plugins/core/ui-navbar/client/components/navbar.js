@@ -183,8 +183,8 @@ class NavBar extends Component {
         {this.renderStaticPages()}
         {this.renderSearchButton()}
         {this.renderNotificationIcon()}
-        {this.renderLanguage()}
-        {this.renderCurrency()}
+        {/* {this.renderLanguage()} */}
+        {/* {this.renderCurrency()} */}
         {this.renderShowOrdersButton()}
         {this.renderMainDropdown()}
         {this.renderCartContainerAndPanel()}
