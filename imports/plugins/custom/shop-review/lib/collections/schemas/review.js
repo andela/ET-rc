@@ -39,8 +39,8 @@ export const Reviews = new SimpleSchema({
   updatedAt: {
     type: Date,
     autoValue: function () {
-      return new Date;
+      return new Date();
     }
   }
 });
-registerSchema("Reviews",  Reviews);
+registerSchema("Reviews", Reviews);

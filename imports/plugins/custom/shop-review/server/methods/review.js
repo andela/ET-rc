@@ -26,9 +26,4 @@ Meteor.methods({
     ]);
     return result[0].averageRating;
   }
-  // "shop.details"(shopId) {
-  //   check(shopId, String);
-  //   const result = Shops.findOne({ _id: shopId });
-  //   return result;
-  // }
 });

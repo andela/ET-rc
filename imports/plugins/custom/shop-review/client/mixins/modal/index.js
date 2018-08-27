@@ -26,6 +26,4 @@ const RenderModal = ({ children, closeModal }) => (
   </div>
 );
 
-export {
-  RenderModal
-};
+export { RenderModal };

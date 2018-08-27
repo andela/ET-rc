@@ -5,7 +5,7 @@ import Stars from "react-stars";
 const RenderShopDetails = ({ shop, renderModal, shopRating }) => (
   <div
     style={{
-      height: "250px",
+      height: "200px",
       width: "100%",
       display: "flex",
       flexFlow: "column wrap",
