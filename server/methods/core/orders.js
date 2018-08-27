@@ -571,7 +571,7 @@ export const methods = {
       const mediaId = Media.findOne(brandAsset.mediaId);
       emailLogo = path.join(Meteor.absoluteUrl(), mediaId.url());
     } else {
-      emailLogo = Meteor.absoluteUrl() + "resources/email-templates/shop-logo.png";
+      emailLogo = "http://res.cloudinary.com/dqsmurjpg/image/upload/c_crop,w_148/v1534503214/shop-logo.png";
     }
 
     let subtotal = 0;
@@ -600,7 +600,6 @@ export const methods = {
       tracking = shippingRecord.tracking;
       shippingCost += shippingRecord.shipmentMethod.rate;
     }
-
 
     const refundResult = Meteor.call("orders/refunds/list", order);
     const refundTotal = Array.isArray(refundResult) && refundResult.reduce((acc, refund) => acc + refund.amount, 0);
@@ -683,17 +682,17 @@ export const methods = {
           display: true,
           facebook: {
             display: true,
-            icon: Meteor.absoluteUrl() + "resources/email-templates/facebook-icon.png",
+            icon: "https://res.cloudinary.com/dqsmurjpg/image/upload/v1534503241/facebook-icon.png",
             link: "https://www.facebook.com"
           },
           googlePlus: {
             display: true,
-            icon: Meteor.absoluteUrl() + "resources/email-templates/google-plus-icon.png",
+            icon: "https://res.cloudinary.com/dqsmurjpg/image/upload/v1534503224/google-plus-icon.png",
             link: "https://plus.google.com"
           },
           twitter: {
             display: true,
-            icon: Meteor.absoluteUrl() + "resources/email-templates/twitter-icon.png",
+            icon: "https://res.cloudinary.com/dqsmurjpg/image/upload/v1534503230/twitter-icon.png",
             link: "https://www.twitter.com"
           }
         },
@@ -745,7 +744,6 @@ export const methods = {
       };
 
       Logger.debug(`orders/sendNotification status: ${order.workflow.status}`);
-
 
       // handle missing root shop email
       if (!shop.emails[0].address) {
@@ -978,7 +976,6 @@ export const methods = {
    */
   "orders/refunds/list": function (order) {
     check(order, Object);
-
     if (!this.userId === order.userId && !Reaction.hasPermission("orders")) {
       throw new Meteor.Error("access-denied", "Access Denied");
     }

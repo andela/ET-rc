@@ -13,14 +13,15 @@
   }
 
   &:hover {
-    background-color: lighten(@cart-icon-bg, 2%);
+    background-color: #fff;
+    color: @etrc-purple-color;
   }
 
   .badge {
     position: absolute;
     bottom: 4px;
     .right(1px);
-    background-color: @cart-icon-badge;
+    background-color: @etrc-purple-color;
   }
 
   .badge-warning {
@@ -41,7 +42,7 @@
   top: 0;
   .right(76px);
   color: @cart-icon-text;
-  background-color: @cart-icon-bg;
+  background-color: @etrc-purple-color;
   display: none;
   z-index: @zindex-modal + 1;
   box-shadow: 0 5px 5px -5px @dropdown-border;
