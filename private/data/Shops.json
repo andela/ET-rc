@@ -1,5 +1,6 @@
 [{
   "_id": "J8Bhq3uTtdgwZx3rz",
+  "slug": "dddd",
   "shopType": "primary",
   "active": true,
   "currencies": {
@@ -1979,7 +1980,6 @@
         "name": "Moldova",
         "native": "Moldova",
         "phone": "373",
-        "continent": "EU",
         "capital": "Chișinău",
         "currency": "MDL",
         "languages": "ro"

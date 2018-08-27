@@ -60,7 +60,7 @@
     "intro.js": "^2.9.3",
     "jquery-i18next": "^1.2.0",
     "later": "^1.2.0",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.10",
     "lodash.pick": "^4.4.0",
     "marked": "^0.4.0",
     "match-sorter": "^1.8.0",
