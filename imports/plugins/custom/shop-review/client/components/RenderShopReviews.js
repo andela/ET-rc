@@ -72,7 +72,24 @@ export default class ShopReviewsList extends Component {
             }}
           >
             { this.props.reviews.length ?  this.renderItems() : <p style={{ fontSize: "18px", marginTop: "20px", textAlign: "center", position: "relative", bottom: "-100px", fontWeight: "bold", color: "#CACFD2" }}> Seems like there are no reviews </p> }
-            <button onClick={() => this.props.handlePageChange(2)}>Page 2</button>
+            { this.props.reviews.length && this.props.reviews.length > 4 ?
+              <CustomButton
+                style={{
+                  position: "relative",
+                  width: "150px",
+                  backgroundColor: "white",
+                  borderRadius: "0px",
+                  borderColor: "white",
+                  color: "#6C3483",
+                  height: "40px",
+                  left: "35%",
+                  top: "-18px"
+                }}
+                handleClick={this.props.handlePageChange}
+                name="Load More"
+              />
+              : null
+            }
           </div>
         </div>
       );
