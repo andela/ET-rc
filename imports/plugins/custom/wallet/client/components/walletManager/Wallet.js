@@ -6,12 +6,36 @@ class Wallet extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      amount: 0
     };
+    this.onChange = this.onChange.bind(this);
+    this.fundWallet = this.fundWallet.bind(this);
   }
 
   componentDidMount() {
     this.props.createWalletIfNotExist();
+  }
+
+  /**
+   * @param  {} e set state on input onchange event
+   */
+  onChange(e) {
+    const state = this.state;
+    console.log(this.state.amount)
+    state[e.target.name] = e.target.value;
+    this.setState(state);
+    console.log(this.state.amount)
+  }
+
+  fundWallet(e) {
+    e.preventDefault();
+    const { amount } = this.state;
+    console.log(amount)
+    if (amount) {
+      this.props.fundWalletWithPaystack(amount).then(
+        (res) => console.log(res)
+      );
+    }
   }
 
   renderBalance() {
@@ -26,8 +50,12 @@ class Wallet extends Component {
     return (
       <div>
         { this.renderBalance() }
-        <button className="btn btn-primary">Fund Wallet</button>
+        <form>
+        <input type="number" onChange={this.onChange} name="amount"/>
+        <button onClick={this.fundWallet} className="btn btn-primary">Fund Wallet</button>
+        </form>
         <h3>Transactions</h3>
+        {this.state.amount}
       </div>
     );
   }
