@@ -1,5 +1,5 @@
 import { Meteor } from "meteor/meteor";
-import { Reviews } from "../../lib/collections";
+import { Reviews } from "../../../products-review/lib/collections";
 import { check } from "meteor/check";
 
 /**

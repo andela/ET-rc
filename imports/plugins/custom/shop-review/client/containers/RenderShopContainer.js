@@ -2,7 +2,7 @@ import { compose, withProps } from "recompose";
 import { registerComponent, composeWithTracker } from "/imports/plugins/core/components/lib";
 import { Reaction } from "/client/api";
 import { Meteor } from "meteor/meteor";
-import { Reviews } from "../../lib/collections";
+import { Reviews } from "../../../products-review/lib/collections";
 import { Products, Shops } from "../../../../../../lib/collections";
 
 import ShopLandingComponent from "../components";

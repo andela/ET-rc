@@ -18,6 +18,7 @@ const ReviewForm = ({ currentRating, changeRating, handleClick, handleChange, va
         height: "120px",
         position: "relative",
         left: "10%",
+        zIndex: 10000,
         width: "100%",
         borderColor: "#BDC3C7",
         borderRadius: "3px",

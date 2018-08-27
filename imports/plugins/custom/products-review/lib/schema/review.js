@@ -1,11 +1,7 @@
 import { SimpleSchema } from "meteor/aldeed:simple-schema";
 import { registerSchema } from "@reactioncommerce/reaction-collections";
 
-<<<<<<< HEAD:imports/plugins/custom/products-review/lib/schema/review.js
 export const ReviewSchema = new SimpleSchema({
-=======
-export const Reviews = new SimpleSchema({
->>>>>>> 11abd62e0... (ft) : Shop review and rating:imports/plugins/custom/shop-review/lib/collections/schemas/review.js
   username: {
     type: String
   },

@@ -1,6 +1,6 @@
 import { Meteor } from "meteor/meteor";
 import { check } from "meteor/check";
-import { Reviews } from "../../lib/collections";
+import { Reviews } from "../../../products-review/lib/collections";
 import { Products, Shops } from "../../../../../../lib/collections";
 
 Meteor.publish("shop.reviews", function (shopId) {

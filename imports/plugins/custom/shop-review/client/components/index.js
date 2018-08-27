@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import debounce from "lodash/debounce";
 import { Meteor } from "meteor/meteor";
 import RenderShopDetails from "./RenderShopDetails";
 import RenderShopProducts from "./RenderShopProducts";
@@ -14,25 +15,35 @@ export default class ShopLandingComponent extends Component {
       shopInfo: {},
       products: [],
       reviews: [],
+      counter: 2,
+
       shopRating: 0
     };
     this.handlePageChange = this.handlePageChange.bind(this);
   }
 
   componentDidMount = () => {
+    const { shopInfo, shopProducts, shopReviews, shopId } = this.props;
     this.setState({
-      shopInfo: this.props.shopInfo,
-      products: this.props.shopProducts,
-      reviews: this.props.shopReviews
+      shopInfo,
+      products: shopProducts,
+      reviews: shopReviews,
+      processing: false,
+      endOfItemsReached: false
     });
-    const { shopId } = this.props;
     Meteor.call("shop.average.rating", shopId, (_, shopRating) => this.setState({ shopRating }));
   }
 
-  handlePageChange(pageNo) {
+  recomputeRating = () => Meteor.call("shop.average.rating", this.props.shopId, (_, shopRating) => this.setState({ shopRating }));
+
+  // wait for 3 seconds before calling
+  handlePageChange() {
     const { getReviews } = this.props;
-    const offset = (pageNo - 1) * 5;
-    this.setState({ reviews: getReviews(offset) });
+    const offset = (this.state.counter - 1) * 5;
+    // we've reached the end of the items;
+    if (!getReviews(offset).length) return this.setState({ endOfItemsReached: true });
+    const reviews = [...this.state.reviews, ...getReviews(offset)];
+    this.setState({ reviews, processing: false, counter: this.state.counter + 1 });
   }
 
   renderModal = () => {
@@ -40,6 +51,7 @@ export default class ShopLandingComponent extends Component {
     this.setState({ wantsToSeeModal: true });
   }
 
+  pushUpToState = (review) => this.setState({ reviews: [review, ...this.state.reviews ] });
 
   render() {
     const { shopProducts } = this.props;
@@ -62,7 +74,12 @@ export default class ShopLandingComponent extends Component {
               <RenderModal
                 closeModal={() => { this.setState({ wantsToSeeModal: false });}}
               >
-                <ShopReviewList reviews={reviews} handlePageChange={this.handlePageChange} />
+                <ShopReviewList
+                  reviews={reviews}
+                  handlePageChange={this.handlePageChange}
+                  pushNewCommentToState={this.pushUpToState}
+                  recomputeRating={this.recomputeRating}
+                />
               </RenderModal>
               : null
             }
