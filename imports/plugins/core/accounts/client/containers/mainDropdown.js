@@ -28,7 +28,9 @@ function displayName(displayUser) {
     // new check covers previous check?
     if (Roles.userIsInRole(user._id || user.userId, "account/profile",
       Reaction.getShopId())) {
-      return i18next.t("accountsUI.guest", { defaultValue: "Guest" });
+      // return i18next.t("accountsUI.guest", { defaultValue: "Guest" });
+      // Show user's email when user doesn't have a name/username
+      return user.emails[0].address;
     }
   }
 }

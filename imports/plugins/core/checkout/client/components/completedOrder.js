@@ -48,7 +48,7 @@ const CompletedOrder = ({ order, orderId, shops, orderSummary, paymentMethods, h
 
   return (
     <div className="container order-completed">
-      { headerText }
+      { isProfilePage ? "" : headerText }
       <div className="order-details-main">
         <div className="order-details-content-title">
           <p><Components.Translation defaultValue="Your Items" i18nKey={"cartCompleted.yourItems"} /></p>
@@ -69,7 +69,7 @@ const CompletedOrder = ({ order, orderId, shops, orderSummary, paymentMethods, h
       </div>
 
       <div className="order-details-side">
-
+        { isProfilePage ? headerText : "" }
         {/* This is the right side / side content */}
         <div className="shipping-payment-details">
           <div className="shipping-info">
