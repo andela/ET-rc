@@ -3,8 +3,7 @@ import { registerSchema } from "@reactioncommerce/reaction-collections";
 
 export const ReviewSchema = new SimpleSchema({
   username: {
-    type: String,
-    optional: true
+    type: String
   },
   rating: {
     type: Number,

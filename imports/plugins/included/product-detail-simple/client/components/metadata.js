@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import classnames from "classnames";
+import CustomButton from "/imports/plugins/custom/shop-review/client/mixins/buttons";
+import { Reaction } from "/client/api";
 import { Components, registerComponent } from "@reactioncommerce/reaction-components";
 
 class ProductMetadata extends Component {
@@ -48,6 +50,20 @@ class ProductMetadata extends Component {
             {this.renderEditButton()}
           </h3>
           <Components.Metadata editable={false} metafields={this.metafields} />
+          <CustomButton
+            style={{
+              marginTop: "20px",
+              position: "relative",
+              width: "160px",
+              backgroundColor: "white",
+              borderRadius: "0px",
+              borderColor: "white",
+              color: "#6C3483",
+              height: "40px"
+            }}
+            name="View Shop"
+            handleClick={() => { Reaction.Router.go(`/display/shop/${this.props.product.shopId}`);}}
+          />
         </div>
       );
     }
