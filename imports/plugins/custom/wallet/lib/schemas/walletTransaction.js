@@ -5,6 +5,7 @@ import { registerSchema } from "@reactioncommerce/reaction-collections";
  * @type {SimpleSchema}
  * @property {String} _id required
  * @property {String} walletId required
+ * @property {String} cartId required
  * @property {Number} worth required - worth of the transaction
  * @property {Number} startingBalance required - balance before transaction
  * @property {Number} closingBalance required - balance after transaction
@@ -34,6 +35,10 @@ export const WalletTransaction = new SimpleSchema({
   },
   type: {
     type: String
+  },
+  cartId: {
+    type: String,
+    optional: true
   },
   createdAt: {
     type: Date,
