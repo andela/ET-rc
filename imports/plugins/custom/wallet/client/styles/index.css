@@ -1,0 +1,9 @@
+.core-payment-method-form {
+  border-bottom: solid 1px #23566d;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.balance-warning {
+  color: #c75927;
+}

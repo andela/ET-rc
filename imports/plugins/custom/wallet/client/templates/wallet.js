@@ -1,5 +1,5 @@
 import { Template } from "meteor/templating";
-import { WalletContainer } from "../containers";
+import { WalletContainer, WalletCheckoutContainer } from "../containers";
 import { AdminWallet } from "../components/admin";
 
 Template.wallet.helpers({
@@ -14,6 +14,14 @@ Template.adminWalletSettings.helpers({
   adminWalletSettings() {
     return {
       component: AdminWallet
+    };
+  }
+});
+
+Template.walletPaymentForm.helpers({
+  walletPaymentForm() {
+    return {
+      component: WalletCheckoutContainer
     };
   }
 });

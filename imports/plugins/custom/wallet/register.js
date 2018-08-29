@@ -20,6 +20,11 @@ Reaction.registerPackage({
       provides: ["paymentSettings"],
       container: "dashboard",
       template: "adminWalletSettings"
+    },
+    {
+      template: "walletPaymentForm",
+      provides: ["paymentMethod"],
+      icon: "fa fa-credit-card-alt"
     }
   ]
 });
