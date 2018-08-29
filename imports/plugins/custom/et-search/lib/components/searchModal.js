@@ -20,6 +20,15 @@ class SearchModal extends Component {
     value: PropTypes.string
   }
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      sortby: "newest",
+      filterParams: "",
+      filterType: ""
+    };
+  }
+
   renderSearchInput() {
     return (
       <div className="rui search-modal-input">
@@ -90,6 +99,56 @@ class SearchModal extends Component {
     );
   }
 
+  handleFilter(event, type) {
+    event.preventDefault();
+    this.setState(() => ({ filterType: type, filterParams: event.target.value }));
+    console.log(this.state.filterType, this.state.filterParams);
+  }
+
+  renderFilterFields() {
+    return (
+      <div style={{ display: "inline-block", margin: "10px" }}>
+        <span style={{ color: "#fff" }}>Filter By</span>
+        <select id="price" onChange={() => this.handleFilter(event, "price")} style={{ margin: "5px", width: "126px", height: "33px" }}>
+          <option value="0">Any Price</option>
+          <option value="0-99">0 - &#x20a6;99</option>
+          <option value="100-999">&#x20a6;100 - &#x20a6;999</option>
+          <option value="1000-9999">&#x20a6;1000 - &#x20a6;9999</option>
+          <option value="10000-99999">&#x20a6;10000 - &#x20a6;99999</option>
+          <option value="100000-999999">&#x20a6;100000 - &#x20a6;999999</option>
+        </select>
+        <select id="vendor" onChange={() => this.handleFilter(event, "vendor")} style={{ margin: "5px", width: "126px", height: "33px" }}>
+          <option value="0">All Vendors</option>
+        </select>
+      </div>
+    );
+  }
+
+  handleSort(event) {
+    event.preventDefault();
+    this.setState(() => ({ sortby: event.target.value }));
+    console.log(this.state.sortby);
+  }
+
+
+  renderSortFields() {
+    return (
+      <div style={{ display: "inline-block", margin: "10px" }}>
+        <span style={{ color: "#fff" }}>Sort By</span>
+        <select
+          id="sort-type"
+          value={this.state.sortby}
+          onChange={() => this.handleSort(event)}
+          style={{ margin: "5px", width: "126px", height: "33px" }}
+        >
+          <option value="newest">Newest</option>
+          <option value="lowest">Lowest Price</option>
+          <option value="highest=">Highest Price</option>
+        </select>
+      </div>
+    );
+  }
+
   render() {
     return (
       <div>
@@ -99,7 +158,12 @@ class SearchModal extends Component {
           {this.renderSearchTypeToggle()}
           {this.props.tags.length > 0 && this.renderProductSearchTags()}
         </div>
-        <p> Hello this is from et-search </p>
+
+        <div style={{ position: "relative", marginTop: "-110px", textAlign: "center", background: "#666666cc" }}>
+          {this.renderFilterFields()}
+          {this.renderSortFields()}
+        </div>
+
         <div className="rui search-modal-results-container">
           {this.props.products.length > 0 &&
             <ProductGridContainer
