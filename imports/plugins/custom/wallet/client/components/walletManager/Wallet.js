@@ -1,15 +1,18 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-
+import Modal from "react-responsive-modal";
+import "./wallet.css";
 
 class Wallet extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      amount: 0
+      amount: 0,
+      open: false
     };
     this.onChange = this.onChange.bind(this);
     this.fundWallet = this.fundWallet.bind(this);
+    this.onModal = this.onModal.bind(this);
   }
 
   componentDidMount() {
@@ -21,21 +24,27 @@ class Wallet extends Component {
    */
   onChange(e) {
     const state = this.state;
-    console.log(this.state.amount)
     state[e.target.name] = e.target.value;
     this.setState(state);
-    console.log(this.state.amount)
   }
 
   fundWallet(e) {
     e.preventDefault();
-    const { amount } = this.state;
-    console.log(amount)
-    if (amount) {
-      this.props.fundWalletWithPaystack(amount).then(
-        (res) => console.log(res)
-      );
+    let { amount } = this.state;
+    amount = Number(amount);
+    if (amount < 1000) {
+      return Alerts.toast("Amount must be 1000 and above", "error", {
+        autoHide: 20000
+      });
     }
+    this.props.fundWalletWithPaystack(amount * 100).then(
+      () => {
+        let { balance } = this.props.wallet;
+        balance += amount;
+        this.props.creditWallet(balance);
+        this.onModal();
+      }
+    );
   }
 
   renderBalance() {
@@ -46,16 +55,35 @@ class Wallet extends Component {
     );
   }
 
+  onModal() {
+    this.setState({ open: !this.state.open });
+  }
+
+  modal() {
+    return (
+      <div className="row">
+        <div className="col-6 text-white">
+          <button onClick={this.onModal} className="btn text-white color">Fund Wallet</button>
+          <Modal open={this.state.open} onClose={this.onModal} center>
+            <br /><h3> Enter Amount to fund your wallet</h3>
+            <form className="form-horizontal">
+              <label className="control-label col-sm-2">Amount</label>
+              <input className="form-control" type="number" onChange={this.onChange} name="amount"/><br />
+              <button onClick={this.fundWallet} className="btn text-white color">Fund Wallet</button>
+            </form>
+          </Modal>
+        </div>
+      </div>
+    );
+  }
   render() {
     return (
       <div>
-        { this.renderBalance() }
-        <form>
-        <input type="number" onChange={this.onChange} name="amount"/>
-        <button onClick={this.fundWallet} className="btn btn-primary">Fund Wallet</button>
-        </form>
+        <div className="text-center">
+          { this.renderBalance() }
+          {this.modal()}
+        </div>
         <h3>Transactions</h3>
-        {this.state.amount}
       </div>
     );
   }
@@ -63,6 +91,8 @@ class Wallet extends Component {
 
 Wallet.propTypes = {
   createWalletIfNotExist: PropTypes.func.isRequired,
+  creditWallet: PropTypes.func.isRequired,
+  fundWalletWithPaystack: PropTypes.func.isRequired,
   wallet: PropTypes.object.isRequired
 };
 export default Wallet;

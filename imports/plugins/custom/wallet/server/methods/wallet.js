@@ -38,5 +38,12 @@ Meteor.methods({
       cartId: Cart.findOne()._id,
       type: "Debit"
     });
+  },
+  /**
+  * @summary This will update a wallet for a user
+  */
+  "wallet/update": function (balance) {
+    check(balance, Number);
+    return Wallets.update({ userId: Meteor.userId() }, { $set: { balance } });
   }
 });
