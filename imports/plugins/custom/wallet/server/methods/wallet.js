@@ -24,26 +24,27 @@ Meteor.methods({
   * @param {Number} balance - The new balance
   * @summary This will updated the balance of a waller through the userId
   */
-  "wallet/updateBalance": function (wallet, amount) {
+  "wallet/updateBalance": function (wallet, amount, type) {
     check(wallet, Object);
-    check(amount, String);
-
-    const newBalance = wallet.balance - amount;
+    check(amount, Number);
+    check(type, String);
+    let newBalance;
+    let cartId;
+    if (type === "Debit") {
+      newBalance = wallet.balance - amount;
+      Cart.findOne()._id;
+    } else {
+      newBalance = wallet.balance + amount;
+      cartId = "Credit";
+    }
     Wallets.update({ userId: Meteor.userId() }, { $set: { balance: newBalance } });
     return WalletTransaction.insert({
       walletId: wallet._id,
       worth: amount,
       startingBalance: wallet.balance,
       closingBalance: newBalance,
-      cartId: Cart.findOne()._id,
-      type: "Debit"
+      cartId,
+      type
     });
-  },
-  /**
-  * @summary This will update a wallet for a user
-  */
-  "wallet/update": function (balance) {
-    check(balance, Number);
-    return Wallets.update({ userId: Meteor.userId() }, { $set: { balance } });
   }
 });

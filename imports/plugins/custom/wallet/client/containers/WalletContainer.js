@@ -19,7 +19,7 @@ const handlers = {
             autoHide: 10000
           });
         }
-        const email = Accounts.findOne({ userId: userId }).emails[0].address;
+        const email = Accounts.findOne({ userId }).emails[0].address;
         if (paystackKeys) {
           const key = paystackKeys.publicKey;
           const paymentInfo = {
@@ -46,8 +46,8 @@ const handlers = {
     });
   },
 
-  creditWallet(balance) {
-    Meteor.call("wallet/update", balance);
+  creditWallet(wallet, amount, type) {
+    Meteor.call("wallet/updateBalance", wallet, amount, type);
   }
 };
 const composer = (props, onData) => {

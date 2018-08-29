@@ -39,9 +39,9 @@ class Wallet extends Component {
     }
     this.props.fundWalletWithPaystack(amount * 100).then(
       () => {
-        let { balance } = this.props.wallet;
-        balance += amount;
-        this.props.creditWallet(balance);
+        const wallet = this.props.wallet;
+        const type = "Credit";
+        this.props.creditWallet(wallet, amount, type);
         this.onModal();
       }
     );
