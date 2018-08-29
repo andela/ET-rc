@@ -52,7 +52,7 @@ class NavBar extends Component {
   }
 
   /* Add a button to the account dropdown.
-   Clicking this button should take a user the order page */
+   Clicking this button should take a user to the order page */
   renderShowOrdersButton() {
     if (this.props.hasProperPermission) {
       return (
