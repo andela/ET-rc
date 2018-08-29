@@ -17,7 +17,7 @@ const handlers = {
       shopId: Reaction.getShopId()
     });
     let paymentMethod;
-    Meteor.call("wallet/updateBalance", wallet, amount, function () {
+    Meteor.call("wallet/updateBalance", wallet, amount, "Debit", function () {
       paymentMethod = {
         processor: "Wallet",
         paymentPackageId: packageData._id,

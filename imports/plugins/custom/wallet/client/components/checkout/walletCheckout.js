@@ -65,7 +65,7 @@ class WalletCheckout extends Component {
       <div>
         {this.state.isSufficient ?
           <button
-            onClick={() => this.props.checkout(this.state.wallet, total)}
+            onClick={() => this.props.checkout(this.state.wallet, Number(total))}
             className="rui btn btn-lg btn-cta btn-block btn-complete-order"
           >
             Pay from wallet
