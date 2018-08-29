@@ -15,14 +15,13 @@ const handlers = {
       const userId = Meteor.user()._id;
       Meteor.call("paystack/getShopKeys", (error, paystackKeys) => {
         if (error) {
-          Alerts.toast("Error fetching paystack keys", "error");
+          Alerts.toast("Error fetching paystack keys", "error", {
+            autoHide: 10000
+          });
         }
         const email = Accounts.findOne({ userId: userId }).emails[0].address;
-        console.log(email)
         if (paystackKeys) {
-          console.log(paystackKeys)
-          return;
-          const key = paystackKeys.public;
+          const key = paystackKeys.publicKey;
           const paymentInfo = {
             key,
             amount,
@@ -32,7 +31,9 @@ const handlers = {
               resolve(response);
             },
             onClose() {
-              Alerts.toast("Transaction cancelled", "error");
+              Alerts.toast("Transaction cancelled", "error", {
+                autoHide: 10000
+              });
             }
           };
           try {
@@ -43,9 +44,12 @@ const handlers = {
         }
       });
     });
+  },
+
+  creditWallet(balance) {
+    Meteor.call("wallet/update", balance);
   }
 };
-
 const composer = (props, onData) => {
   let wallet = {};
   const subscription = Meteor.subscribe("Wallet");
