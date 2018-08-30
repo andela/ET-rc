@@ -1,4 +1,5 @@
 import { Meteor } from "meteor/meteor";
+import { Reaction } from "../../../../../../server/api";
 import { Wallets, WalletTransaction } from "../../lib/schemas";
 import { Cart } from "../../../../../../lib/collections";
 import { check } from "meteor/check";
@@ -29,13 +30,12 @@ Meteor.methods({
     check(amount, Number);
     check(type, String);
     let newBalance;
-    let cartId;
+    let cartId = "";
     if (type === "Debit") {
-      newBalance = wallet.balance - amount;
-      Cart.findOne()._id;
+      newBalance = parseFloat(wallet.balance - amount);
+      cartId = Cart.findOne()._id;
     } else {
-      newBalance = wallet.balance + amount;
-      cartId = "Credit";
+      newBalance = parseFloat(wallet.balance + amount);
     }
     Wallets.update({ userId: Meteor.userId() }, { $set: { balance: newBalance } });
     return WalletTransaction.insert({
@@ -46,5 +46,15 @@ Meteor.methods({
       cartId,
       type
     });
+  },
+
+  /**
+  * @method
+  * @summary Initiate a wallet refund
+  */
+  "wallet/refund": function (paymentMethod) {
+    check(paymentMethod, Reaction.Schemas.PaymentMethod);
+    const wallet = Wallets.findOne({ userId: Meteor.userId() });
+    return Meteor.call("wallet/updateBalance", wallet, parseFloat(paymentMethod.amount), "Credit");
   }
 });

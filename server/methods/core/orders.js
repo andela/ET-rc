@@ -15,6 +15,7 @@ import { Logger, Hooks, Reaction } from "/server/api";
 // returns entire payment method
 export function orderCreditMethod(order) {
   const creditBillingRecords = order.billing.filter(value => value.paymentMethod.method ===  "credit");
+
   const billingRecord = creditBillingRecords.find((billing) => {
     return billing.shopId === Reaction.getShopId();
   });
@@ -341,6 +342,7 @@ export const methods = {
 
     let paymentMethod = orderCreditMethod(order).paymentMethod;
     paymentMethod = Object.assign(paymentMethod, { amount: Number(paymentMethod.amount) });
+
     const invoiceTotal = billingRecord.invoice.total;
     const shipment = shippingRecord;
     const itemIds = shipment.items.map((item) => {
@@ -348,8 +350,11 @@ export const methods = {
     });
 
     // refund payment to customer
-    Meteor.call("orders/refunds/create", order._id, paymentMethod, Number(invoiceTotal));
-
+    if (paymentMethod.processor === "Wallet") {
+      Meteor.call("wallet/refund", paymentMethod);
+    } else {
+      Meteor.call("orders/refunds/create", order._id, paymentMethod, Number(invoiceTotal));
+    }
     // send notification to user
     const prefix = Reaction.getShopPrefix();
     const url = `/shop${prefix}/notifications`;

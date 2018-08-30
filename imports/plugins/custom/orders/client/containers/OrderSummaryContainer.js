@@ -31,38 +31,30 @@ handlers.handleDisplayMedia = (item) => {
 };
 
 const composer = (props, onData) => {
-  const sessionId = Session.get("sessionId");
-  Reaction.Subscriptions.Cart = Reaction.Subscriptions.Manager.subscribe("Cart", sessionId, Meteor.userId());
-  const orderSub = Meteor.subscribe("CompletedCartOrder", Meteor.userId(), props.order._id);
-  if (orderSub.ready()) {
-    const { order } = props;
-    const imageSub = Meteor.subscribe("CartImages", order.items);
-    const orderSummary = {
-      quantityTotal: order.getCount(),
-      subtotal: order.getSubTotal(),
-      shippingTotal: order.getShippingTotal(),
-      tax: order.getTaxTotal(),
-      discounts: order.getDiscounts(),
-      total: order.getTotal(),
-      shipping: order.shipping
-    };
+  const { order } = props;
+  const orderSummary = {
+    quantityTotal: order.getCount(),
+    subtotal: order.getSubTotal(),
+    shippingTotal: order.getShippingTotal(),
+    tax: order.getTaxTotal(),
+    discounts: order.getDiscounts(),
+    total: order.getTotal(),
+    shipping: order.shipping
+  };
 
-    if (imageSub.ready()) {
-      const productImages = Media.find().fetch();
+  const productImages = Media.find().fetch();
 
-      onData(null, {
-        isProfilePage: true,
-        shops: order.getShopSummary(),
-        isShowingModal: props.isShowingModal,
-        closeModal: props.closeModal,
-        order,
-        orderId: order._id,
-        orderSummary,
-        paymentMethods: order.getUniquePaymentMethods(),
-        productImages
-      });
-    }
-  }
+  onData(null, {
+    isProfilePage: true,
+    shops: order.getShopSummary(),
+    isShowingModal: props.isShowingModal,
+    closeModal: props.closeModal,
+    order,
+    orderId: order._id,
+    orderSummary,
+    paymentMethods: order.getUniquePaymentMethods(),
+    productImages
+  });
 };
 
 registerComponent("OrderSummary", OrderSummary, [composeWithTracker(composer), withProps(handlers)]);
