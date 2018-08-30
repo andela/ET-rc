@@ -23,6 +23,7 @@ class ProductKind extends Component {
     Meteor.call("fetchDigitalProduct", productId, (err, product) => {
       if (err) {
         Logger.error("Fetching product failed");
+        return err;
       }
       if (product.isDigital) {
         this.setState({
@@ -94,18 +95,19 @@ class ProductKind extends Component {
         });
       }
     }).then((response) => {
+      const url = `${response.data.secure_url.slice(0, 50)}fl_attachment/${response.data.secure_url.slice(50)}`;
       this.setState({
         uploadSuccess: true,
         uploading: false,
         uploadError: false,
-        productURL: response.data.secure_url
+        productURL: url
       });
 
       const productDetails = {
         uploadSuccess: true,
         productId: ReactionProduct.selectedProductId(),
         isDigital: true,
-        productUrl: response.data.secure_url
+        productUrl: url
       };
 
       Meteor.call("addDigitalProduct", productDetails, (err) => {
@@ -151,6 +153,7 @@ class ProductKind extends Component {
               <input
                 ref="file"
                 type="file"
+                accept=".jpg, .jpeg, .png, .pdf"
                 style={{ width: "50%", marginBottom: "10px", height: "30px", position: "relative", left: "0px" }}
                 className="form-control-file"
                 onChange={this.handleFileSize}
@@ -173,7 +176,10 @@ class ProductKind extends Component {
         }
         {(this.state.productURL) &&
           <div style={{ marginBottom: "15px" }} >
-            <a ref="productUrl" style={{ color: "#7e3794" }} href={this.state.productURL} target="_blank" >Click to Preview Your File</a>
+            <a ref="productUrl" style={{ color: "#7e3794" }}
+              href={this.state.productURL} target="_blank"
+            >
+              <i className="fa fa-eye" aria-hidden="true" /> Preview</a>
           </div>}
       </div>
     );
