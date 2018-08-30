@@ -90,12 +90,14 @@ class ProductGridItems extends Component {
   renderGridContent() {
     const style = {
       float: "right",
-      marginTop: "25px",
+      marginTop: "21px",
       marginRight: "6px",
       backgroundColor: "#7e3794",
       color: "white",
-      padding: "1px 4px",
-      borderRadius: "3px"
+      padding: "2px 6px",
+      borderRadius: "3px",
+      letterSpacing: "2px",
+      lineHeight: "23px"
     };
     return (
       <div className="grid-content">

@@ -278,7 +278,13 @@
                                                 <table width="360" border="0" cellspacing="0" cellpadding="0" class="emailwrapto100pc">
                                                   <tbody>
                                                     <tr>
-                                                      <td align="left" valign="middle" style="font-size:12px; line-height:normal; color:#4c4c4d; font-family:Arial, helvetica;">{{title}} - {{variants.title}}</td>
+                                                      <td align="left" valign="middle" style="font-size:12px; line-height:normal; color:#4c4c4d; font-family:Arial, helvetica;">
+                                                        {{title}} - {{variants.title}}
+                                                        <br>
+                                                        {{#if product.isDigital}}
+                                                          <a href="{{product.productUrl}}">Download</a>
+                                                        {{/if}}
+                                                      </td>
                                                       <td align="right" valign="middle" style="font-size:12px; line-height:normal; color:#4c4c4d; font-family:Arial, helvetica;">{{variants.displayPrice}}</td>
                                                     </tr>
                                                   </tbody>
