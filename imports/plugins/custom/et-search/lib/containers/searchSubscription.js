@@ -18,11 +18,10 @@ function getSiteName() {
 }
 
 function getProductHashtags(productResults) {
-  const foundHashtags = {}; // Object to keep track of results for O(1) lookup
+  const foundHashtags = {};
   return productResults.reduce((hashtags, product) => {
     if (Array.isArray(product.hashtags)) {
       product.hashtags.forEach((tag) => {
-        // If we haven't added this tag yet, push it and add it to the foundHashtags dict
         if (!foundHashtags[tag]) {
           hashtags.push(tag);
           foundHashtags[tag] = true;
@@ -36,6 +35,7 @@ function getProductHashtags(productResults) {
 function composer(props, onData) {
   const searchResultsSubscription = Meteor.subscribe("SearchResults", props.searchCollection, props.value, props.facets);
   const shopMembersSubscription = Meteor.subscribe("ShopMembers");
+  const vendorSubscription = Meteor.subscribe("VendorResults");
 
   if (searchResultsSubscription.ready() && shopMembersSubscription.ready()) {
     const siteName = getSiteName();
@@ -44,10 +44,16 @@ function composer(props, onData) {
     let accountResults = [];
 
     /*
+      load the vendors to component;
+    */
+    const vendorResults = vendorSubscription.ready() ? Collections.Shops.find({}).fetch() : [];
+
+    /*
     * Product Search
     */
     if (props.searchCollection === "products") {
-      productResults = Collections.ProductSearch.find().fetch();
+      const query = props.filterObject ? { ...props.filterObject } : {};
+      productResults = Collections.ProductSearch.find(query, { sort: { ...props.sortObject } }).fetch();
 
       const productHashtags = getProductHashtags(productResults);
       tagSearchResults = Collections.Tags.find({
@@ -66,7 +72,8 @@ function composer(props, onData) {
       siteName,
       products: productResults,
       accounts: accountResults,
-      tags: tagSearchResults
+      tags: tagSearchResults,
+      vendors: vendorResults
     });
   }
 }

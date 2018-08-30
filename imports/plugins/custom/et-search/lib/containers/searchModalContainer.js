@@ -20,7 +20,10 @@ const wrapComponent = (Comp) => (
         collection: "products",
         value: localStorage.getItem("searchValue") || "",
         renderChild: true,
-        facets: []
+        facets: [],
+        filterObject: false,
+        sortObject: {}
+
       };
     }
 
@@ -37,6 +40,7 @@ const wrapComponent = (Comp) => (
         this.setState({
           renderChild: false
         });
+        document.body.style.overflow = "auto";
       }
     }
 
@@ -45,6 +49,10 @@ const wrapComponent = (Comp) => (
 
       this.setState({ value });
     }
+
+    handleFilter = (filter) => !filter ? this.setState({ filterObject: false }) : this.setState({ filterObject: { ...this.state.filterObject, ...filter } });
+
+    handleSort = (sortObject) =>  this.setState({ sortObject })
 
     handleClick = () => {
       localStorage.setItem("searchValue", "");
@@ -66,12 +74,14 @@ const wrapComponent = (Comp) => (
       });
     }
 
+
     handleToggle = (collection) => {
       this.setState({ collection });
     }
 
     handleChildUnmount = () =>  {
       this.setState({ renderChild: false });
+      document.body.style.overflow = "auto";
     }
 
     render() {
@@ -84,11 +94,15 @@ const wrapComponent = (Comp) => (
                 handleClick={this.handleClick}
                 handleToggle={this.handleToggle}
                 handleAccountClick={this.handleAccountClick}
+                handleSort={this.handleSort}
+                handleFilter={this.handleFilter}
                 handleTagClick={this.handleTagClick}
                 value={this.state.value}
                 unmountMe={this.handleChildUnmount}
                 searchCollection={this.state.collection}
                 facets={this.state.facets}
+                sortObject={this.state.sortObject}
+                filterObject={this.state.filterObject}
               />
             </div> : null
           }
