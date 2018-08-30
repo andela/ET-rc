@@ -23,7 +23,7 @@ const handlers = {
         paymentPackageId: packageData._id,
         paymentSettingsKey: packageData.registry[0].settingsKey,
         storedCard: "",
-        method: "debit",
+        method: "credit",
         transactionId: "",
         riskLevel: "normal",
         currency: Shops.findOne().currency,

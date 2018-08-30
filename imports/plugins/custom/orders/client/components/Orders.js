@@ -79,56 +79,71 @@ class Orders extends Component {
   }
 
   renderTableRow() {
-    return (
-      this.state.orders.map(order =>
-        <tr key={order._id}>
-          <td>{order._id}</td>
-          <td>{new Date(order.createdAt).toDateString()}</td>
-          <td>{order.email}</td>
-          <td>{order.shipping[0].shipmentMethod.label}</td>
-          <td>
-            <div className="status-info">
-              <span className={this.getOrderClassNames(this.getOrderStatus(order))}>
-                {this.getOrderStatus(order)}
-              </span>
-            </div>
-          </td>
-          <td>
-            {this.getOrderStatus(order) === "new" || this.getOrderStatus(order) === "processing" ?
-              <button onClick={() => this.showCancelWarning(order)} className="btn btn-default">Cancel Order</button> : ""}
-          </td>
-          <td className="more-button">
-            <a onClick={() => this.setCurrentId(order._id)}><i className="fa fa-angle-right" /></a>
-          </td>
-          <span><OrderSummaryContainer order={order} closeModal={this.closeModal} isShowingModal={this.state.selectedOrderId === order._id} /></span>
-        </tr>)
-    );
+    return this.state.orders.map(order =>
+      <tr key={order._id}>
+        <td>{order._id}</td>
+        <td>{new Date(order.createdAt).toDateString()}</td>
+        <td>{order.email}</td>
+        <td>{order.shipping[0].shipmentMethod.label}</td>
+        <td>
+          <div className="status-info">
+            <span className={this.getOrderClassNames(this.getOrderStatus(order))}>
+              {this.getOrderStatus(order)}
+            </span>
+          </div>
+        </td>
+        <td>
+          {this.getOrderStatus(order) === "new" || this.getOrderStatus(order) === "processing" ?
+            <button onClick={() => this.showCancelWarning(order)} className="btn btn-default">Cancel Order</button> : ""}
+        </td>
+        <td className="more-button">
+          <a onClick={() => this.setCurrentId(order._id)}><i className="fa fa-angle-right" /></a>
+        </td>
+      </tr>);
   }
 
   renderOrderTables() {
     return (
-      <table className="table table-bordered order-table">
-        <thead>
-          <tr>
-            <th>Order ID</th>
-            <th>Email</th>
-            <th>Date</th>
-            <th>Shipping</th>
-            <th>Status</th>
-            <th>Action</th>
-            <th>More</th>
-          </tr>
-        </thead>
-        <tbody>
-          {this.renderTableRow()}
-        </tbody>
-      </table>
+      <div>
+        { this.renderOrderSummaryModals() }
+        <table className="table table-bordered order-table">
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Date</th>
+              <th>Email</th>
+              <th>Shipping</th>
+              <th>Status</th>
+              <th>Action</th>
+              <th>More</th>
+            </tr>
+          </thead>
+          <tbody>
+            {this.renderTableRow()}
+          </tbody>
+        </table>
+      </div>
+    );
+  }
+
+  renderOrderSummaryModals() {
+    return (
+      <div>
+        { this.state.orders.map((order) =>
+          <OrderSummaryContainer
+            key={order._id}
+            order={order}
+            closeModal={this.closeModal}
+            isShowingModal={this.state.selectedOrderId === order._id}
+          />)
+        }
+      </div>
     );
   }
 
   renderEmptyHeader() {
     return (
-      <h2 style={{ textAlign: "center" }}>{this.state.isFetchingOrder ? "" : "Your order history is empty"}</h2>
+      <h3 style={{ textAlign: "center" }}>{this.state.isFetchingOrder ? "" : "Your order history is empty"}</h3>
     );
   }
 

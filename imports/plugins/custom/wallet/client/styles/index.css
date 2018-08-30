@@ -7,3 +7,11 @@
 .balance-warning {
   color: #c75927;
 }
+
+.color {
+  background-color: rgb(126, 55, 148);
+  color: white
+}
+.color:hover{
+  color: white;
+}
