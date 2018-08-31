@@ -10,6 +10,7 @@ class ProductGridItems extends Component {
     connectDragSource: PropTypes.func,
     connectDropTarget: PropTypes.func,
     displayPrice: PropTypes.func,
+    isDigital: PropTypes.bool,
     isMediumWeight: PropTypes.func,
     isSearch: PropTypes.bool,
     isSelected: PropTypes.func,
@@ -87,6 +88,17 @@ class ProductGridItems extends Component {
   }
 
   renderGridContent() {
+    const style = {
+      float: "right",
+      marginTop: "21px",
+      marginRight: "6px",
+      backgroundColor: "#7e3794",
+      color: "white",
+      padding: "2px 6px",
+      borderRadius: "3px",
+      letterSpacing: "2px",
+      lineHeight: "23px"
+    };
     return (
       <div className="grid-content">
         <a
@@ -102,7 +114,10 @@ class ProductGridItems extends Component {
             <div className="overlay-title">{this.props.product.title}</div>
             <div className="currency-symbol">{formatPriceString(this.props.displayPrice())}</div>
             {this.props.isSearch &&
-                <div className="overlay-description">{this.props.product.description}</div>
+              <div className="overlay-description">{this.props.product.description}</div>
+            }
+            {this.props.product.isDigital &&
+              <div style={style}>Digital</div>
             }
           </div>
         </a>
