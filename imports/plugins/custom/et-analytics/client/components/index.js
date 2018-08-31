@@ -1,9 +1,12 @@
-
 import React, { Component } from "react";
-import RenderAnalyticsDetails from "./RenderAnalyticsDetails";
 import { Meteor } from "meteor/meteor";
+import ProductList from "./ProductList";
+import RenderAnalyticsDetails from "./RenderAnalyticsDetails";
 
-
+/**
+ * Renders the Analytics component
+ * @class
+ */
 export default class Analytics extends Component {
   constructor(props) {
     super(props);
@@ -14,8 +17,10 @@ export default class Analytics extends Component {
       completed: 0,
       processing: 0,
       canceled: 0,
-      totalOrdered: 0
+      totalOrdered: 0,
+      products: []
     };
+    this.fetchTopTenProducts = this.fetchTopTenProducts.bind(this);
   }
 
   componentDidMount = () => {
@@ -55,10 +60,27 @@ export default class Analytics extends Component {
       }
       this.setState({ totalOrdered: result[0].total });
     });
+    this.fetchTopTenProducts();
+  }
+
+  /**
+  * Fetch top ten products
+  */
+  fetchTopTenProducts() {
+    Meteor.call("analytics/topTenProducts", (error, response) => {
+      if (error) {
+        return;
+      }
+      this.setState({ products: response });
+    });
   }
 
   render() {
-    const { grand, completed, canceled, processing, totalOrdered } = this.state;
+    const {
+      grand, completed, canceled,
+      processing, totalOrdered, products
+    } = this.state;
+
     return (
       <div>
         <RenderAnalyticsDetails
@@ -68,8 +90,19 @@ export default class Analytics extends Component {
           canceled={canceled}
           totalOrdered={totalOrdered}
         />
+        {products.length < 1
+          ?
+          <div className="text-center">
+            <h4><strong>No product has been ordered</strong></h4>
+          </div>
+          :
+          <div>
+            <h4 className="text-center mt">
+              <strong>Top Ten Selling Products</strong>
+            </h4>
+            <ProductList products={products} />
+          </div>}
       </div>
     );
   }
 }
-
