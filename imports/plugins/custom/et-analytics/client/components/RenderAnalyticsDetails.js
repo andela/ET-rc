@@ -5,12 +5,12 @@ import "../stylesheets/styles.less";
 /**
   * Renders analytics details
  */
-const RenderAnalyticsDetails = ({ grand, completed, canceled, totalOrdered, processing }) => (
+const RenderAnalyticsDetails = ({ grand, completed, canceled, productTotal, processing }) => (
   <div className="row container card-list">
     <div className="col-md-3 card-container">
       <div className="card">
-        <div className="title">Total Transactions</div>
-        <div className="value">{totalOrdered}</div>
+        <div className="title">Total items purchased</div>
+        <div className="value">{productTotal}</div>
       </div>
     </div>
     <div className="col-md-3 card-container">
@@ -45,7 +45,7 @@ RenderAnalyticsDetails.propTypes = {
   completed: PropTypes.number.isRequired,
   grand: PropTypes.number.isRequired,
   processing: PropTypes.number.isRequired,
-  totalOrdered: PropTypes.number.isRequired
+  productTotal: PropTypes.number.isRequired
 };
 
 export default RenderAnalyticsDetails;

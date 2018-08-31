@@ -12,7 +12,7 @@ const ProductRow = ({ product }) => {
       <th scope="row">{product.id}</th>
       <td>{product.name}</td>
       <td>{product.quantitySold}</td>
-      <td>{product.total}</td>
+      <td>{product.total.toFixed(2)}</td>
       <td>{product.firstPurchaseDate.toDateString()}</td>
       <td>{product.lastPurchaseDate.toDateString()}</td>
     </tr>

@@ -18,14 +18,56 @@ Meteor.methods({
     return Orders.aggregate([
       { $match: { "workflow.status": "coreOrderWorkflow/completed" } },
       { $unwind: "$items" },
+      { $unwind: { path: "$billing" } },
       { $group: {
         _id: null,
-        grandTotal: { $sum: { $multiply: ["$items.variants.price", "$items.quantity"] } }
+        grandTotal: { $sum: "$billing.paymentMethod.amount" }
+      }
+      }
+    ]);
+  },
+  "total.quantity.purchased"() {
+    return Orders.aggregate([
+      { $match: { "workflow.status": "coreOrderWorkflow/completed" } },
+      { $unwind: "$items" },
+      { $group: {
+        _id: null,
+        totalBought: { $sum: "$items.quantity" }
       }
       }
     ]);
   },
   "orders.total"() {
+    return Orders.aggregate([
+      { $match: { "workflow.status": "coreOrderWorkflow/completed" } },
+      { $group: {
+        _id: null,
+        total: { $sum: 1 }
+      }
+      }
+    ]);
+  },
+  "orders.processing"() {
+    return Orders.aggregate([
+      { $match: { $or: [{ "workflow.status": "coreOrderWorkflow/processing" }, { "workflow.status": "new" }]  } },
+      { $group: {
+        _id: null,
+        total: { $sum: 1 }
+      }
+      }
+    ]);
+  },
+  "orders.canceled"() {
+    return Orders.aggregate([
+      { $match: { "workflow.status": "coreOrderWorkflow/canceled" } },
+      { $group: {
+        _id: null,
+        total: { $sum: 1 }
+      }
+      }
+    ]);
+  },
+  "orders.completed"() {
     return Orders.aggregate([
       { $match: { "workflow.status": "coreOrderWorkflow/completed" } },
       { $group: {
@@ -50,7 +92,7 @@ Meteor.methods({
   "analytics/topTenProducts": function () {
     return Orders.aggregate([
       { $unwind: { path: "$items" } },
-      { $match: { "items.quantity": { $gt: 0 }, "workflow.status": "coreOrderWorkflow/canceled" } },
+      { $match: { "items.quantity": { $gt: 0 }, "workflow.status": "coreOrderWorkflow/completed" } },
       { $unwind: { path: "$billing" } },
       { $group: {
         _id: "items.productId",

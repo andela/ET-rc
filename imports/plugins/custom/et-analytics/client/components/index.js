@@ -28,37 +28,37 @@ export default class Analytics extends Component {
       if (error) {
         return error;
       }
-      this.setState({ grand: result[0].grandTotal });
+      this.setState({ grand: result[0].grandTotal.toFixed(2) });
     });
-    Meteor.call("orders.status", (error, result) => {
+    Meteor.call("total.quantity.purchased", (error, result) => {
       if (error) {
         return error;
       }
-      let completed = 0;
-      let processing = 0;
-      let canceled = 0;
-      for (let i = 0; i < result.length; i += 1) {
-        if ((result[i]._id)[0] === "coreOrderItemWorkflow/completed") {
-          completed = result[i].status;
-        } else if ((result[i]._id)[0] === "coreOrderItemWorkflow/canceled") {
-          canceled = result[i].status;
-        } else if ((result[i]._id)[0] === "coreOrderItemWorkflow/processing") {
-          processing = result[i].status;
-        }
-      }
-      this.setState({ completed, canceled, processing });
-    });
-    Meteor.call("product.total.price", (error, result) => {
-      if (error) {
-        return error;
-      }
-      this.setState({ productTotal: result });
+      this.setState({ productTotal: result[0].totalBought });
     });
     Meteor.call("orders.total", (error, result) => {
       if (error) {
         return error;
       }
       this.setState({ totalOrdered: result[0].total });
+    });
+    Meteor.call("orders.processing", (error, result) => {
+      if (error) {
+        return error;
+      }
+      this.setState({ processing: result[0].total });
+    });
+    Meteor.call("orders.canceled", (error, result) => {
+      if (error) {
+        return error;
+      }
+      this.setState({ canceled: result[0].total });
+    });
+    Meteor.call("orders.completed", (error, result) => {
+      if (error) {
+        return error;
+      }
+      this.setState({ completed: result[0].total });
     });
     this.fetchTopTenProducts();
   }
@@ -77,8 +77,8 @@ export default class Analytics extends Component {
 
   render() {
     const {
-      grand, completed, canceled,
-      processing, totalOrdered, products
+      grand, completed, canceled, products,
+      processing, totalOrdered, productTotal
     } = this.state;
 
     return (
@@ -89,6 +89,7 @@ export default class Analytics extends Component {
           processing={processing}
           canceled={canceled}
           totalOrdered={totalOrdered}
+          productTotal={productTotal}
         />
         {products.length < 1
           ?
