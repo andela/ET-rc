@@ -110,8 +110,8 @@ class Orders extends Component {
           <thead>
             <tr>
               <th>Order ID</th>
-              <th>Email</th>
               <th>Date</th>
+              <th>Email</th>
               <th>Shipping</th>
               <th>Status</th>
               <th>Action</th>

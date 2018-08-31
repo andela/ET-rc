@@ -59,8 +59,7 @@ Meteor.methods({
     check(productId, String);
 
     const product = Products.findOne({
-      _id: productId,
-      isDigital: true
+      _id: productId
     });
     if (product !== undefined) {
       return product;

@@ -32,7 +32,7 @@ class ProductKind extends Component {
         });
         checkDigitalProduct.checked = true;
       }
-      if (product.title) {
+      if (product.isVisible) {
         checkDigitalProduct.disabled = true;
       }
     });
@@ -46,13 +46,9 @@ class ProductKind extends Component {
     });
 
     const productDetails = {
-      uploadSuccess: false,
       productId: ReactionProduct.selectedProductId(),
       isDigital: checkDigitalProduct.checked
     };
-
-    productDetails.isDigital = checkDigitalProduct.checked;
-    window.productKind = checkDigitalProduct.checked ? "digital" : "physical";
 
     Meteor.call("addDigitalProduct", productDetails, (err) => {
       if (err) {

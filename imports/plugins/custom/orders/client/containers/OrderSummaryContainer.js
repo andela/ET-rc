@@ -1,9 +1,6 @@
 import { compose, withProps } from "recompose";
-import { Meteor } from "meteor/meteor";
 import { registerComponent, composeWithTracker } from "@reactioncommerce/reaction-components";
-import { Session } from "meteor/session";
 import { Media } from "../../../../../../lib/collections";
-import { Reaction } from "../../../../../../client/api";
 import { OrderSummary } from "../components";
 
 const handlers = {
