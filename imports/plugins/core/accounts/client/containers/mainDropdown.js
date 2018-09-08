@@ -77,6 +77,8 @@ function handleChange(event, value) {
         });
       }
     });
+  } else if (value.route === "/analytics") {
+    return Reaction.Router.go("/analytics");
   } else if (value.name !== "account/profile" && value.name !== "wallet") {
     return Reaction.showActionView(value);
   } else if (value.route || value.name) {
