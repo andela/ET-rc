@@ -1,0 +1,2 @@
+import "./vendorResults";
+import "./searchResults";
